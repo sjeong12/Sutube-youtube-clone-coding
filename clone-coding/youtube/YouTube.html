@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width:device-width">
 		<link rel="stylesheet" href="YouTube.css">
 		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css' integrity='sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==' crossorigin='anonymous'/>
+		<script src="YouTube.js" defer></script>
 		<title>YouTube</title>
 	</head>
 	<body>
@@ -21,20 +22,20 @@
 		</div>
 		<div class="title-area">
 			<div class="hashtag">
-				<a href="">#해시태그</a>
+				<a href="#">#해시태그</a>
 			</div>
 			<div class="title">
 				<span>영상 제목</span>
-				<a href=""><i class="fas fa-chevron-down"></i></a>
+				<a href="#"><i class="fas fa-chevron-down" id="open-title"></i></a>
 			</div>
 			<div class="view">조회수 123만회</div>
 		</div>
 		<ul class="video-buttons">
-			<li><a href=""><i class="fas fa-thumbs-up"></i><div>1.2천</div></a></li>
-			<li><a href=""><i class="fas fa-thumbs-down"></i><div>123</div></a></li>
-			<li><a href=""><i class="fas fa-share"></i><div>공유</div></a></li>
-			<li><a href=""><i class="fas fa-plus-square"></i><div>저장</div></a></li>
-			<li><a href=""><i class="fas fa-flag"></i><div>신고</div></a></li>
+			<li><a href="#"><i class="fas fa-thumbs-up"></i><div>1.2천</div></a></li>
+			<li><a href="#"><i class="fas fa-thumbs-down"></i><div>123</div></a></li>
+			<li><a href="#"><i class="fas fa-share"></i><div>공유</div></a></li>
+			<li><a href="#"><i class="fas fa-plus-square"></i><div>저장</div></a></li>
+			<li><a href="#"><i class="fas fa-flag"></i><div>신고</div></a></li>
 		</ul>
 		<div class="channel-area">
 			<a href="" class="channel">
@@ -46,12 +47,49 @@
 			</a>
 			<button class="channel-subscribe">구독</button>
 		</div>
-		<div class="comments-area">
-			<div class="comments">
-				<span class="comments-title">댓글</span>
-				<span class="comments-num"> • 999개</span>
+		<div class="comments-close">
+			<a href="#" class="open-comments">
+				<div>
+					<span class="comments-title">댓글</span>
+					<span class="comments-num"> • 999개</span>
+				</div>
+				<i class="fas fa-expand-alt"></i>
+			</a>
+		</div>
+		<div class="comments-open">
+			<div class="comments-header">
+				<span>댓글</span>
+				<a href="#" class="close-comments">&times;</a>
 			</div>
-			<a href=""><i class="fas fa-expand-alt"></i></a>
+			<div class="comments-add">
+				<div class="comments-input">
+					<div class="channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
+					<div class="simple-textarea">
+						공개 댓글 추가…
+					</div>
+					<textarea class="textarea" placeholder="공개 댓글 추가…" rows="4"></textarea>
+				</div>
+				<div class="comments-buttons">
+					<button type="reset">취소</button>
+					<button class="ok" type="submit">댓글</button>
+				</div>
+			</div>
+			<div class="comments-list">
+				<div class="comments-item">
+					<div class="channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
+					<div class="comment">
+						<div id="channel-title">채널 이름</div>
+						<div id="comment-content">이 곳에 댓글 내용이 적힙니다.</div>
+						<div id="comment-info"> 30분 전 • 
+							<a href="#"><i class="fas fa-thumbs-up"></i><span>123</span></a>
+							<a href="#"><i class="fas fa-thumbs-down"></i></a>
+							<a href="#"><i class="fas fa-comment-dots"></i><span>1</span></a>
+						</div>
+					</div>
+					<a href=""><i class="fas fa-ellipsis-v"></i></a>
+				</div>
+				<button class="open-reply">답글 더보기</button>
+			</div>
 		</div>
 		<div class="next-video">
 			<h3>다음 동영상</h3>
@@ -62,10 +100,10 @@
 						<div class="channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
 						<div class="title">
 							<div class="video-title">영상 제목</div>
-							<div class="channel-title">채널명 • 조회수 12만회</div>
+							<div class="channel-title">채널 이름 • 조회수 12만회</div>
 						</div>
 					</div>
-					<a href=""><i class="fas fa-ellipsis-v"></i></a>
+					<a href="#"><i class="fas fa-ellipsis-v"></i></a>
 				</div>
 			</section>
 		</div>
