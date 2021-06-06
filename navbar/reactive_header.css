@@ -1,0 +1,122 @@
+:root {
+	--text-color: #fafafa;
+	--background-color: #d1c4e9;
+	--accent-color: #ffe57f;
+}
+
+/* 공통 영역 */
+body {
+	margin: 0px;
+}
+
+a {
+	text-decoration: none;
+	color: var(--text-color);
+}
+
+/* 헤더 영역 */
+nav {
+	position: relative;
+	height: fit-content;
+	padding: 0 40px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-family: 'Roboto', sans-serif;
+	background: var(--background-color);
+}
+
+/* 로고 + 타이틀과 메뉴 버튼 */
+.title {
+	width: fit-content;
+	height: 90px;
+	display: flex;
+	align-items: center;
+	font-size: 15pt;
+	font-weight: 600;
+}
+.title > i {
+	margin-right: 10px;
+	color: var(--accent-color);
+}
+
+/* 카테고리 */
+.category {
+	width: fit-content;
+	display: flex;
+	justify-content: space-between;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	font-size: 11pt;
+}
+.category > li {
+	padding: 8px 12px;
+}
+.category > li:hover {
+	background: var(--accent-color);
+}
+
+/* SNS 버튼 */
+.sns > a > i.fab.fa-twitter {
+	margin-right: 15px;
+}
+
+div.hamburger {
+	display: none;
+}
+
+/* 모바일 화면 */
+@media screen and (max-width: 800px) {
+	/* 메뉴 닫힘 */
+	nav {
+		height: fit-content;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	.title {
+		width: 100%;
+		justify-content: flex-start;
+	}
+	.category {
+		display: none;
+	}
+	.sns {
+		display: none;
+	}
+
+	/* 메뉴 열림 */
+	.category.open {
+		display: unset;
+		width: 100%;
+		height: fit-content;
+		align-items: center;
+		background: var(--background-color);
+	}
+	.category.open > li {
+		width: 100%;
+		/* border-bottom: 1px solid #fafafa; */
+		text-align: center;
+		padding: 0;
+		line-height: 45px;
+	}
+	/*
+	.category.open > li:last-child {
+		border-bottom: none;
+	}
+	*/
+	.sns.open {
+		display: flex;
+		height: 45px;
+		justify-content: center;
+		align-items: center;
+		background: var(--background-color);
+	}
+
+	div.hamburger {
+		position: absolute;
+		display: flex;
+		top: 35px;
+		right: 40px;
+	}
+}
