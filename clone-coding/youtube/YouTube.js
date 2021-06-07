@@ -1,7 +1,5 @@
-const titleArea = document.querySelector(".title-area");
-const videoButtons = document.querySelector(".video-buttons");
-const channelArea = document.querySelector(".channel-area");
-const nextVideo = document.querySelector(".next-video");
+const infoSection = document.querySelector(".info-section");
+const nextSection = document.querySelector(".next-video-section");
 const commentsClose = document.querySelector(".comments-close");
 const commentsOpen = document.querySelector(".comments-open");
 const openComments = document.querySelector(".open-comments");
@@ -20,22 +18,16 @@ openTitle.addEventListener("click", () => {
 });
 
 openComments.addEventListener("click", () => {
-	titleArea.classList.toggle("open-comments");
-	videoButtons.classList.toggle("open-comments");
-	channelArea.classList.toggle("open-comments");
-	videoContents.classList.toggle("open-comments");
+	infoSection.classList.toggle("open-comments");
 	commentsClose.classList.toggle("open-comments");
 	commentsOpen.classList.toggle("open-comments");
-	nextVideo.classList.toggle("open-comments");
+	nextSection.classList.toggle("open-comments");
 });
 closeComments.addEventListener("click", () => {
-	titleArea.classList.remove("open-comments");
-	videoButtons.classList.remove("open-comments");
-	channelArea.classList.remove("open-comments");
-	videoContents.classList.remove("open-comments");
+	infoSection.classList.remove("open-comments");
 	commentsClose.classList.remove("open-comments");
 	commentsOpen.classList.remove("open-comments");
-	nextVideo.classList.remove("open-comments");
+	nextSection.classList.remove("open-comments");
 });
 
 simpleText.addEventListener("click", () => {
