@@ -4,7 +4,6 @@ const channelArea = document.querySelector(".channel-area");
 const nextVideo = document.querySelector(".next-video");
 const commentsClose = document.querySelector(".comments-close");
 const commentsOpen = document.querySelector(".comments-open");
-const openTitle = document.querySelector("#open-title");
 const openComments = document.querySelector(".open-comments");
 const closeComments = document.querySelector(".close-comments");
 
@@ -12,13 +11,19 @@ const simpleText = document.querySelector(".simple-textarea");
 const textarea = document.querySelector(".textarea");
 const closeTextarea = document.querySelector(".comments-buttons");
 
+const openTitle = document.querySelector(".open-title");
+const videoContents = document.querySelector(".video-contents");
+
 openTitle.addEventListener("click", () => {
+	openTitle.classList.toggle("open");
+	videoContents.classList.toggle("open");
 });
 
 openComments.addEventListener("click", () => {
 	titleArea.classList.toggle("open-comments");
 	videoButtons.classList.toggle("open-comments");
 	channelArea.classList.toggle("open-comments");
+	videoContents.classList.toggle("open-comments");
 	commentsClose.classList.toggle("open-comments");
 	commentsOpen.classList.toggle("open-comments");
 	nextVideo.classList.toggle("open-comments");
@@ -27,6 +32,7 @@ closeComments.addEventListener("click", () => {
 	titleArea.classList.remove("open-comments");
 	videoButtons.classList.remove("open-comments");
 	channelArea.classList.remove("open-comments");
+	videoContents.classList.remove("open-comments");
 	commentsClose.classList.remove("open-comments");
 	commentsOpen.classList.remove("open-comments");
 	nextVideo.classList.remove("open-comments");

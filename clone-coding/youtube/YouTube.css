@@ -12,6 +12,7 @@
 body {
 	margin: 0;
 	color: #000;
+	font-family: 'Roboto', 'Nanum Gothic Coding', sans-serif;
 }
 
 a {
@@ -37,8 +38,8 @@ button:hover {
 	outline: none;
 }
 
-/* nav */
-nav {
+/* header */
+header {
 	width: 100%;
 	height: 48px;
 	display: flex;
@@ -48,19 +49,19 @@ nav {
 }
 .logo {
 	padding: 12px;
-	height: 24px;
+	height: 20px;
 }
-nav > ul {
+header > ul {
 	display: flex;
 	align-items: center;
 }
-nav > ul > li > a {
+header > ul > li > a {
 	padding: 12px;
 	color:var(--soft-white);
 }
 
 /* video */
-.video {
+.video-section {
 	position: relative;
 	width: 100%;
 	padding-bottom: 56.26%;
@@ -81,19 +82,35 @@ iframe {
 .title-area > .hashtag > a {
 	color: var(--blue);
 }
-.title-area > .title {
+.title-area > .open-title {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
-	margin: 5px 0;
+	align-items: flex-start;
+}
+.title-area > .open-title > div > .title {
 	font-size: 14.2pt;
+	margin: 5px 0;
 }
-.title-area > .title > a {
-	font-size: 11pt;
-}
-.title-area > .view {
+.title-area > .open-title > div > .view {
 	font-size: 9pt;
 	color: var(--text-dark-grey);
+}
+.title-area > .open-title > i {
+	font-size: 11pt;
+	margin: 10px 5px;
+}
+/* 타이틀 열기 닫기 버튼 */
+#up {
+	display: none;
+}
+#down {
+	display: block;
+}
+.open-title.open > #up {
+	display: block;
+}
+.open-title.open > #down {
+	display: none;
 }
 
 /* video-buttons */
@@ -111,7 +128,6 @@ iframe {
 }
 .video-buttons > li > a > div {
 	font-size: 10pt;
-	color: var(--text-dark-grey);
 }
 
 /* channel-area */
@@ -149,6 +165,21 @@ iframe {
 	width: 50px;
 	font-size: 10.8pt;
 	color: var(--text-red);
+}
+
+/* video-contents */
+.video-contents {
+	display: none;
+}
+.video-contents.open {
+	display: block;
+	padding: 15px 10px;
+	font-size: 10.5pt;
+	color: var(--text-dark-grey);
+	border-bottom: 1px solid var(--grey);
+}
+.video-contents.open.open-comments {
+	display: none;
 }
 
 /* comments-close */
@@ -247,6 +278,7 @@ iframe {
 	background: #f9f9f9;
 	border: 1px solid var(--grey);
 	padding: 5px;
+	font-family: 'Roboto', 'Nanum Gothic Coding', sans-serif;
 }
 .comments-buttons.active-textarea {
 	display: unset;
@@ -278,7 +310,7 @@ iframe {
 	color: var(--text-dark-grey);
 }
 #comment-content {
-	font-size: 11pt;
+	font-size: 10.5pt;
 	color: #000;
 }
 #comment-info {
@@ -303,50 +335,50 @@ iframe {
 }
 
 /* next-video */
-.next-video {
+.next-video-section {
 	padding: 8px;
 }
-.next-video > h3 {
+.next-video-section > h3 {
 	margin: 12px;
 	font-size: 10.5pt;
 	font-weight: 400;
 }
-.next-video > .video-item {
+.next-video-section > .video-item {
 	margin: 12px;
 	width: 500px;
 	height: 500px;
 }
-.video-thumbnail {
+.next-video-thumbnail {
 	width: 220px;
 	height: 147px;
 	line-height: 147px;
 	background: #000;
 	overflow: hidden;
 }
-.video-thumbnail > img {
+.next-video-thumbnail > img {
 	width: 220px;
 	vertical-align: middle;
 }
-.video-meta {
+.next-video-meta {
 	width: 220px;
 	margin-top: 10px;
 	display: flex;
 	justify-content: flex-start;
-	align-items: center;
 }
-.video-info {
+.next-video-info {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 }
-.video-info > .title > .video-title {
+.next-video-info > .title > .video-title {
 	width: 150px;
 	font-size: 11pt;
 }
-.video-info > .title > .channel-title {
+.next-video-info > .title > .channel-title {
 	font-size: 9pt;
 	color: var(--text-grey)
 }
-.video-meta > a {
+.next-video-meta > a {
 	padding: 5px;
+	margin-left: 15px;
 }
