@@ -84,7 +84,7 @@ header > ul > li > a {
 	padding-bottom: 56.26%;
 	z-index: 1;
 }
-iframe {
+.video-section > video {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -224,27 +224,35 @@ iframe {
 	display: none;
 }
 .comments-open.open-comments {
+	position: relative;
 	display: block;
-	width: 100%;
-	height: 100vh;
+	width:100%;
+	height: 100%;
 	background: #f9f9f9;
 }
 
 .comments-header {
+	position: fixed;
 	display: flex;
+	width: 100%;
+	height: 56px;
 	justify-content: space-between;
 	align-items: center;
-	padding: 10px 20px;
 	font-size: 10.5pt;
 	border-bottom: 1px solid var(--grey);
 	background: #fff;
 }
+.comments-header > span {
+	padding: 10px;
+}
 .comments-header > a {
 	font-size: 24pt;
 	font-weight: 200;
+	padding: 10px;
 }
 
 .comments-body {
+	padding-top: 56px;
 	overflow-y: auto;
 }
 .comments-add {
