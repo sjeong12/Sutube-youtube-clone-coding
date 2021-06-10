@@ -12,6 +12,7 @@
 		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Noto+Sans+KR&display=swap" rel="stylesheet">
 		<script src="YouTube.js" defer></script>
 		<script src="button_click.js" defer></script>
+		<script src="video-controls.js" defer></script>
 		<title>YouTube</title>
 	</head>
 	<body>
@@ -26,23 +27,34 @@
 		<!-- 영상 -->
 		<section class=video-section>
 			<!-- <iframe src="https://www.youtube.com/embed/67stn7Pu7s4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-			<video controls>
+			<video id="video" autoplay>
 				<source src="src/video.mp4" type="video/mp4">
 				지원하지 않는 브라우저입니다.
 			</video>
-			<div id="video-controls" class="controls" data-state="visible">
-				<button id="playpause" type="button" data-state="play">Play/Pause</button>
-				<button id="stop" type="button" data-state="stop">Stop</button>
-				<div class="progress">
-				   <progress id="progress" value="0" min="0">
-					  <span id="progress-bar"></span>
-				   </progress>
+			<div id="video-controls" class="controls" data-state="hidden">
+				<div class="controls-top">
+					<button id="backward"><i class="fas fa-cog"></i></button>
 				</div>
-				<button id="mute" type="button" data-state="mute">Mute/Unmute</button>
-				<button id="volinc" type="button" data-state="volup">Vol+</button>
-				<button id="voldec" type="button" data-state="voldown">Vol-</button>
-				<button id="fs" type="button" data-state="go-fullscreen">Fullscreen</button>
-			 </div>
+				<div class="controls-mid">
+					<button id="backward"><i class="fas fa-step-backward"></i></button>
+					<button id="playpause" type="button" data-state="pause">
+						<i class="fas fa-play" id="playbutton"></i>
+						<i class="fas fa-pause" id="pausebutton"></i>
+					</button>
+					<button id="forward"><i class="fas fa-step-forward"></i></button>
+				</div>
+				<div class="controls-bottom">
+					<span id="playtime"><span id="currentT"></span><span id="duration"></span></span>
+					<button id="fs" type="button" data-state="go-fullscreen"><i class="fas fa-expand"></i></button>
+				</div>
+				<div class="progress">
+					<div id="progress-bar-line">
+						<div id="progress-bar">
+							<div id="playhead"><div id="playhead-dot"></div></div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
 
 		<!-- 영상 정보 -->
