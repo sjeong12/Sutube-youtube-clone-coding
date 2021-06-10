@@ -107,3 +107,11 @@
 	border-radius: 50%;
 	background: var(--red);
 }
+
+/* fullscreen */
+html:-ms-fullscreen {
+	width:100%;
+}
+:-webkit-full-screen {
+	background-color:transparent;
+}

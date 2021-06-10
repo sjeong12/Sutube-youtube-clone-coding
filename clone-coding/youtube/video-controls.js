@@ -59,10 +59,10 @@ fs.addEventListener("click", function(e) {
 		setFullscreenData(false);
 	}
 	else {
-		if (videoContainer.requestFullscreen) videoContainer.requestFullscreen();
-		else if (videoContainer.mozRequestFullScreen) videoContainer.mozRequestFullScreen();
-		else if (videoContainer.webkitRequestFullScreen) videoContainer.webkitRequestFullScreen();
-		else if (videoContainer.msRequestFullscreen) videoContainer.msRequestFullscreen();
+		if (videoSection.requestFullscreen) videoSection.requestFullscreen();
+		else if (videoSection.mozRequestFullScreen) videoSection.mozRequestFullScreen();
+		else if (videoSection.webkitRequestFullScreen) videoSection.webkitRequestFullScreen();
+		else if (videoSection.msRequestFullscreen) videoSection.msRequestFullscreen();
 		setFullscreenData(true);
 	}
 });
