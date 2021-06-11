@@ -2,13 +2,28 @@ const videoSection = document.querySelector(".video-section");
 const video = document.querySelector("#video");
 const controls = document.querySelector("#video-controls");
 const playpause = document.querySelector("#playpause");
-const progress = document.querySelector(".progress");
+const progressBarLine = document.querySelector("#progress-bar-line");
 const progressBar = document.querySelector("#progress-bar");
 const fs = document.querySelector("#fs");
 const currentTime = document.querySelector("#currentT");
 const duration = document.querySelector("#duration");
 
-controls.setAttribute('data-state', 'visible');
+let toastControls;
+controls.addEventListener('click', function(e) {
+	if (controls.getAttribute('data-state') == 'hidden')
+	{
+		controls.setAttribute('data-state', 'visible');
+		if (!video.paused)
+		{
+			clearTimeout(toastControls);
+			toastControls = setTimeout(function () {
+				controls.setAttribute('data-state', 'hidden');
+			}, 2000);
+		}
+	}
+	else
+		controls.setAttribute('data-state', 'hidden');
+});
 
 var changeButtonState = function(type) {
 	if (type == 'playpause') {
@@ -35,19 +50,31 @@ playpause.addEventListener('click', function(e) {
 	else video.pause();
 });
 
-progress.addEventListener('click', function(e) {
-	var pos = (e.pageX  - (this.offsetLeft + this.offsetParent.offsetLeft)) / this.offsetWidth;
-	video.currentTime = pos * video.duration;
+progressBarLine.addEventListener('mousedown', function(e) {
+	let currentTime;
+
+	function moveAt(e) {
+		let pos = (e.pageX  - (progressBarLine.offsetLeft + progressBarLine.offsetParent.offsetLeft)) / progressBarLine.offsetWidth;
+		currentTime = pos * video.duration;
+		progressBar.style.width = currentTime / video.duration * 100 + "%";
+		return currentTime;
+	}
+	moveAt(e);
+	document.addEventListener('mousemove', moveAt);
+	document.addEventListener('mouseup', function(e) {
+		video.currentTime = currentTime;
+		document.removeEventListener('mousemove', moveAt);
+	});
 });
+
+// progressBarLine.addEventListener('click', function(e) {
+// 	let pos = (e.pageX  - (progressBarLine.offsetLeft + progressBarLine.offsetParent.offsetLeft)) / progressBarLine.offsetWidth;
+//  	video.currentTime = pos * video.duration;
+// });
 
 video.addEventListener("timeupdate", function(e) {
 	currentTime.innerText = getTime(new Date(this.currentTime * 1000));
 	progressBar.style.width = this.currentTime / this.duration * 100 + "%";
-});
-
-video.addEventListener("webkitfullscreenchange", function(e) {
-	var isFullscreenNow = document.webkitFullscreenElement !== null
-	alert('Fullscreen ' + isFullscreenNow)
 });
 
 fs.addEventListener("click", function(e) {
@@ -61,7 +88,7 @@ fs.addEventListener("click", function(e) {
 	else {
 		if (videoSection.requestFullscreen) videoSection.requestFullscreen();
 		else if (videoSection.mozRequestFullScreen) videoSection.mozRequestFullScreen();
-		else if (videoSection.webkitRequestFullScreen) videoSection.webkitRequestFullScreen();
+		else if (videoSection.webkitRequestFullScreen) document.body.webkitRequestFullScreen();
 		else if (videoSection.msRequestFullscreen) videoSection.msRequestFullscreen();
 		setFullscreenData(true);
 	}
@@ -72,7 +99,7 @@ function isFullScreen() {
 }
 
 function setFullscreenData(state) {
-	videoSection.setAttribute('data-fullscreen', !!state);
+	document.body.setAttribute('data-fullscreen', !!state);
 }
 
 function getTime(time) {
