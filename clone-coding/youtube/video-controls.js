@@ -1,28 +1,38 @@
 const videoSection = document.querySelector(".video-section");
-const video = document.querySelector("#video");
-const controls = document.querySelector("#video-controls");
-const playpause = document.querySelector("#playpause");
-const progressBarLine = document.querySelector("#progress-bar-line");
-const progressBar = document.querySelector("#progress-bar");
-const fs = document.querySelector("#fs");
-const currentTime = document.querySelector("#currentT");
-const duration = document.querySelector("#duration");
+const storyboard = document.querySelector(".player-storyboard");
+const storyboardImage = document.getElementById("player-storyboard-image");
+const storyboardTime = document.getElementById("player-storyboard-time");
+const video = document.getElementById("video");
+const controls = document.getElementById("video-controls");
+const playpause = document.getElementById("playpause");
+const progress = document.querySelector(".progress");
+const progressBarLine = document.getElementById("progress-bar-line");
+const progressBar = document.getElementById("progress-bar");
+const fs = document.getElementById("fs");
+const currentTime = document.getElementById("currentT");
+const duration = document.getElementById("duration");
 
 let toastControls;
 controls.addEventListener('click', function(e) {
+	video.muted = false;
 	if (controls.getAttribute('data-state') == 'hidden')
 	{
 		controls.setAttribute('data-state', 'visible');
+		progress.setAttribute('data-state', 'visible');
 		if (!video.paused)
 		{
 			clearTimeout(toastControls);
 			toastControls = setTimeout(function () {
 				controls.setAttribute('data-state', 'hidden');
+				progress.setAttribute('data-state', 'hidden');
 			}, 2000);
 		}
 	}
 	else
+	{
 		controls.setAttribute('data-state', 'hidden');
+		progress.setAttribute('data-state', 'hidden');
+	}
 });
 
 var changeButtonState = function(type) {
@@ -51,26 +61,56 @@ playpause.addEventListener('click', function(e) {
 });
 
 progressBarLine.addEventListener('mousedown', function(e) {
-	let currentTime;
-
-	function moveAt(e) {
-		video.pause();
-		let pos = (e.pageX  - (progressBarLine.offsetLeft + progressBarLine.offsetParent.offsetLeft)) / progressBarLine.offsetWidth;
-		currentTime = pos * video.duration;
-		video.currentTime = currentTime;
-		progressBar.style.width = currentTime / video.duration * 100 + "%";
+	function moveProgress(e) {
+		progress.setAttribute('data-state', 'visible');
+		controls.setAttribute('data-state', 'screen');
+		if (!video.paused)
+		{
+			changeButtonState('playpause');
+			video.pause();
+		}
+		storyboard.setAttribute('aria-hidden', 'false');
+		// let pos = (e.pageX  - (progressBarLine.offsetLeft + progressBarLine.offsetParent.offsetLeft)) / progressBarLine.offsetWidth;
+		let pos = (e.pageX  - progressBarLine.offsetLeft) / progressBarLine.offsetWidth;
+		video.currentTime = pos * video.duration;
+		progressBar.style.width = video.currentTime / video.duration * 100 + "%";
+		storyboard.style.left = progressBar.style.width;
+		storyboardImage.src = getScreenshot(video, 0.35);
+		storyboardTime.innerText = getTime(new Date(video.currentTime * 1000));
 	}
-	moveAt(e);
-	document.addEventListener('mousemove', moveAt);
-	document.addEventListener('mouseup', function(e) {
-		document.removeEventListener('mousemove', moveAt);
-		video.play();
-	});
+	function upProgress(e) {
+		document.removeEventListener('mousemove', moveProgress);
+		if (video.paused)
+		{
+			changeButtonState('playpause');
+			video.play();
+		}
+		storyboard.setAttribute('aria-hidden', 'true');
+		progress.setAttribute('data-state', 'hidden');
+		controls.setAttribute('data-state', 'hidden');
+		document.removeEventListener('mouseup', upProgress);
+	}
+
+	moveProgress(e);
+	document.addEventListener('mousemove', moveProgress);
+	document.addEventListener('mouseup', upProgress);
 });
+
+function getScreenshot(video, scale) {
+	scale = scale || 1;
+
+	const canvas = document.createElement("canvas");
+	canvas.width = video.clientWidth * scale;
+	canvas.height = video.clientHeight * scale;
+	canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+	//image.crossOrigin = 'Anonymous';
+	return canvas.toDataURL();
+}
 
 video.addEventListener("timeupdate", function(e) {
 	currentTime.innerText = getTime(new Date(this.currentTime * 1000));
 	progressBar.style.width = this.currentTime / this.duration * 100 + "%";
+	storyboard.style.left = progressBar.style.width;
 });
 
 fs.addEventListener("click", function(e) {
@@ -80,6 +120,10 @@ fs.addEventListener("click", function(e) {
 		else if (document.webkitCancelFullScreen) document.webkitCancelFullScreen();
 		else if (document.msExitFullscreen) document.msExitFullscreen();
 		setFullscreenData(false);
+		if (fs.getAttribute('data-state') == 'fullscreen')
+			fs.setAttribute('data-state', 'unfullscreen');
+		else
+			fs.setAttribute('data-state', 'fullscreen');
 	}
 	else {
 		if (videoSection.requestFullscreen) videoSection.requestFullscreen();
@@ -87,6 +131,10 @@ fs.addEventListener("click", function(e) {
 		else if (videoSection.webkitRequestFullScreen) document.body.webkitRequestFullScreen();
 		else if (videoSection.msRequestFullscreen) videoSection.msRequestFullscreen();
 		setFullscreenData(true);
+		if (fs.getAttribute('data-state') == 'fullscreen')
+			fs.setAttribute('data-state', 'unfullscreen');
+		else
+			fs.setAttribute('data-state', 'fullscreen');
 	}
 });
 

@@ -9,20 +9,24 @@
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	background: rgba(0, 0, 0, 30%);
+	background: rgba(0, 0, 0, 40%);
+	opacity: 0;
 	transition: opacity .5s;
 }
-.controls[data-state=hidden]{
-	opacity: 0;
+.controls > * {
+	display: none;
 }
 .controls[data-state=visible]{
 	opacity: 1;
 }
-.controls[data-state=hidden] > * {
-	display: none;
-}
 .controls[data-state=visible] > * {
 	display: flex;
+}
+.controls[data-state=screen]{
+	opacity: 1;
+}
+.controls[data-state=screen] > * {
+	display: none;
 }
 
 
@@ -66,6 +70,18 @@
 #duration {
 	opacity: 0.8;
 }
+#fs[data-state=unfullscreen] > #expand {
+	display: block;
+}
+#fs[data-state=unfullscreen] > #compress {
+	display: none;
+}
+#fs[data-state=fullscreen] > #expand {
+	display: none;
+}
+#fs[data-state=fullscreen] > #compress {
+	display: block;
+}
 
 .controls button {
 	border:none;
@@ -82,13 +98,17 @@
 	display: none;
 }
 
-.controls .progress {
+.progress {
 	width:100%;
 	height: 2px;
-	position: absolute;
+	position:absolute;
 	bottom: -2px;
 	cursor:pointer;
 	background: var(--dark-grey);
+	display: none;
+}
+.progress[data-state=visible] {
+	display: block;
 }
 #progress-bar-line {
 	width: calc(100% - 12px);
@@ -119,6 +139,46 @@
 	background: var(--red);
 }
 
+/* story-board */
+.player-storyboard {
+	width: fit-content;
+    height: fit-content;
+	position: absolute;
+	bottom: 0;
+	-webkit-transform: translate(-50%,-40%);
+	transform: translate(-50%,-40%);
+	display: none;
+}
+.player-storyboard[aria-hidden="false"] {
+	display:block;
+}
+#player-storyboard-image {
+	width: fit-content;
+	min-width: 1px;
+    min-height: 1px;
+	max-width: 200px;
+    filter: none;
+	background-color: white;
+	border: 1px solid white;
+}
+#player-storyboard-image:not([src]) {
+    visibility: hidden;
+}
+.player-storyboard-metadata {
+    color: white;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+    width: 100%;
+    font-weight: 500;
+    font-size: 12px;
+	opacity: 0.8;
+}
+
 /* fullscreen */
 html:-ms-fullscreen {
 	width:100%;
@@ -139,7 +199,7 @@ body[data-fullscreen=true] > .video-section > video {
 	width: 100%;
 	height: 100%;
 }
-body[data-fullscreen=true] > .video-section > .controls > .progress {
+body[data-fullscreen=true] > .video-section > .progress {
 	bottom: 6%;
 }
 body[data-fullscreen=true] > .video-section > .controls > .controls-top {

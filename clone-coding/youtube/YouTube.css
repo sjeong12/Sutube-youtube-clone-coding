@@ -82,10 +82,13 @@ header > ul > li > a {
 	width: 100%;
 	position: sticky;
 	top: 48px;
-	padding-bottom: 56.26%;
 	z-index: 1;
 }
-.video-section > video {
+.video-section > .video-screen {
+	width: 100%;
+	padding-bottom: 56.26%;
+}
+.video-section > .video-screen > #video {
 	width: 100%;
 	height: 100%;
 	position: absolute;
