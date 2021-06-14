@@ -54,23 +54,19 @@ progressBarLine.addEventListener('mousedown', function(e) {
 	let currentTime;
 
 	function moveAt(e) {
+		video.pause();
 		let pos = (e.pageX  - (progressBarLine.offsetLeft + progressBarLine.offsetParent.offsetLeft)) / progressBarLine.offsetWidth;
 		currentTime = pos * video.duration;
+		video.currentTime = currentTime;
 		progressBar.style.width = currentTime / video.duration * 100 + "%";
-		return currentTime;
 	}
 	moveAt(e);
 	document.addEventListener('mousemove', moveAt);
 	document.addEventListener('mouseup', function(e) {
-		video.currentTime = currentTime;
 		document.removeEventListener('mousemove', moveAt);
+		video.play();
 	});
 });
-
-// progressBarLine.addEventListener('click', function(e) {
-// 	let pos = (e.pageX  - (progressBarLine.offsetLeft + progressBarLine.offsetParent.offsetLeft)) / progressBarLine.offsetWidth;
-//  	video.currentTime = pos * video.duration;
-// });
 
 video.addEventListener("timeupdate", function(e) {
 	currentTime.innerText = getTime(new Date(this.currentTime * 1000));
