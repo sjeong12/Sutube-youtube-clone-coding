@@ -10,6 +10,7 @@
 }
 
 body {
+	min-width: 200px;
 	margin: 0;
 	color: #000;
 	font-family: 'Roboto', 'Nanum Gothic Coding', sans-serif;
@@ -355,33 +356,25 @@ header > ul > li > a {
 	padding: 10px;
 }
 .next-video-section > h3 {
-	margin: 12px;
+	margin: 0 12px;
 	font-size: 10.5pt;
 	font-weight: 400;
 }
-.next-video-list {
-	display: flex;
-	flex-direction: column;
-}
 .next-video-item {
-	display: flex;
-	flex-direction: column;
 	margin: 12px;
 }
 .next-video-item > .next-video-thumbnail {
-	flex: 1 1 70%;
-	position: relative;
-	width: 100%;
 	padding-bottom: 56.26%;
+	position: relative;
 	background: #000;
 	overflow: hidden;
 }
 .next-video-item > .next-video-thumbnail > img {
-	position: absolute;
 	width: 100%;
+	position: absolute;
 }
 .next-video-item > .next-video-meta {
-	flex: 1 1 30%;
+	width: 100%;
 	margin-top: 10px;
 	display: flex;
 	justify-content: space-between;
@@ -395,6 +388,7 @@ header > ul > li > a {
 	position: relative;
 	width: 100%;
 	min-width: 35px;
+	max-width: 40px;
 	margin-right: 10px;
 	overflow: hidden;
 }
