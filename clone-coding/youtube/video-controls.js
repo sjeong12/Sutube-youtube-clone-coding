@@ -93,11 +93,9 @@ progressBarLine.addEventListener('mousedown', function(e) {
 		document.removeEventListener('mouseup', upProgress);
 	}
 
+	controls.setAttribute('data-state', 'screen');
 	if (!video.paused)
-	{
-		controls.setAttribute('data-state', 'screen');
 		video.pause();
-	}
 	moveProgress(e);
 	storyboard.setAttribute('aria-hidden', 'false');
 	progress.setAttribute('data-state', 'visible');
