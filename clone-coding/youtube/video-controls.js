@@ -65,14 +65,6 @@ playpause.addEventListener('click', function(e) {
 
 progressBarLine.addEventListener('mousedown', function(e) {
 	function moveProgress(e) {
-		progress.setAttribute('data-state', 'visible');
-		controls.setAttribute('data-state', 'screen');
-		if (!video.paused)
-		{
-			changeButtonState('playpause');
-			video.pause();
-		}
-		storyboard.setAttribute('aria-hidden', 'false');
 		// let pos = (e.pageX  - (progressBarLine.offsetLeft + progressBarLine.offsetParent.offsetLeft)) / progressBarLine.offsetWidth;
 		let pos = (e.pageX  - progressBarLine.offsetLeft) / progressBarLine.offsetWidth;
 		video.currentTime = pos * video.duration;
@@ -95,9 +87,17 @@ progressBarLine.addEventListener('mousedown', function(e) {
 		document.removeEventListener('mouseup', upProgress);
 	}
 
+	moveProgress(e);
+	if (!video.paused)
+	{
+		changeButtonState('playpause');
+		video.pause();
+	}
+	storyboard.setAttribute('aria-hidden', 'false');
+	progress.setAttribute('data-state', 'visible');
+	controls.setAttribute('data-state', 'screen');
 	videoScreen.setAttribute('data-state', 'visible');
 	videoScreen.style.backgroundImage = "url(" + getScreenshot(video, 1) + ")";
-	moveProgress(e);
 	document.addEventListener('mousemove', moveProgress);
 	document.addEventListener('mouseup', upProgress);
 });
