@@ -37,14 +37,17 @@ controls.addEventListener('click', function(e) {
 
 var changeButtonState = function(type) {
 	if (type == 'playpause') {
-	   if (video.paused || video.ended) {
-		  playpause.setAttribute('data-state', 'pause');
-		  clearTimeout(toastControls);
-		controls.setAttribute('data-state', 'visible');
-		progress.setAttribute('data-state', 'visible');
-	   }
-	   else {
-		  playpause.setAttribute('data-state', 'play');
+		if (video.paused || video.ended) {
+			playpause.setAttribute('data-state', 'pause');
+			clearTimeout(toastControls);
+			if (controls.getAttribute('data-state') !== 'screen')
+			{
+				controls.setAttribute('data-state', 'visible');
+				progress.setAttribute('data-state', 'visible');
+			}
+		}
+		else {
+			playpause.setAttribute('data-state', 'play');
 	   }
 	}
 }
@@ -59,17 +62,12 @@ video.addEventListener('pause', function() {
 }, false);
 
 playpause.addEventListener('click', function(e) {
-	if (video.paused || video.ended) {
-		video.play();
-	}
-	else {
-		video.pause();
-	}
+	if (video.paused || video.ended) video.play();
+	else video.pause();
 });
 
 progressBarLine.addEventListener('mousedown', function(e) {
 	function moveProgress(e) {
-		controls.setAttribute('data-state', 'screen');
 		// let pos = (e.pageX  - (progressBarLine.offsetLeft + progressBarLine.offsetParent.offsetLeft)) / progressBarLine.offsetWidth;
 		let pos = (e.pageX  - progressBarLine.offsetLeft) / progressBarLine.offsetWidth;
 		video.currentTime = pos * video.duration;
@@ -96,7 +94,10 @@ progressBarLine.addEventListener('mousedown', function(e) {
 	}
 
 	if (!video.paused)
+	{
+		controls.setAttribute('data-state', 'screen');
 		video.pause();
+	}
 	moveProgress(e);
 	storyboard.setAttribute('aria-hidden', 'false');
 	progress.setAttribute('data-state', 'visible');
