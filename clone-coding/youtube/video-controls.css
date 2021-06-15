@@ -13,26 +13,23 @@
 	opacity: 0;
 	transition: opacity .5s;
 }
-.controls > * {
-	display: none;
-}
-.controls[data-state=visible]{
+.controls[data-state=visible] {
 	opacity: 1;
 }
-.controls[data-state=visible] > * {
+.controls[data-state=visible] > div {
 	display: flex;
 }
 .controls[data-state=screen]{
 	opacity: 1;
 }
-.controls[data-state=screen] > * {
+.controls[data-state=screen] > div {
 	display: none;
 }
 
 
 .controls-top {
 	width: 100%;
-	display: flex;
+	display: none;
 	justify-content: flex-end;
 	align-items: center;
 }
@@ -43,7 +40,7 @@
 .controls-mid {
 	width: 100%;
 	min-width: fit-content;
-	display: flex;
+	display: none;
 	justify-content: center;
 	align-items: center;
 }
@@ -58,7 +55,7 @@
 
 .controls-bottom {
 	width: 100%;
-	display: flex;
+	display: none;
 	justify-content: space-between;
 	align-items: center;
 }

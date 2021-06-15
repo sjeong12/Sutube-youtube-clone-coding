@@ -14,7 +14,6 @@ const duration = document.getElementById("duration");
 
 let toastControls;
 controls.addEventListener('click', function(e) {
-	video.muted = false;
 	if (controls.getAttribute('data-state') == 'hidden')
 	{
 		controls.setAttribute('data-state', 'visible');
@@ -53,6 +52,9 @@ video.addEventListener('play', function() {
 }, false);
 video.addEventListener('pause', function() {
 	changeButtonState('playpause');
+	clearTimeout(toastControls);
+	controls.setAttribute('data-state', 'visible');
+	progress.setAttribute('data-state', 'visible');
 }, false);
 
 playpause.addEventListener('click', function(e) {
