@@ -15,6 +15,7 @@ const duration = document.getElementById("duration");
 
 let toastControls;
 controls.addEventListener('click', function(e) {
+	video.muted = false;
 	if (controls.getAttribute('data-state') == 'hidden')
 	{
 		clearTimeout(toastControls);

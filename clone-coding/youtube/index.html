@@ -24,247 +24,257 @@
 				<li><a href=""><i class="fas fa-ellipsis-v"></i></a></li>
 			</ul>
 		</header>
-		<!-- 영상 -->
-		<section class=video-section>
-			<!-- <iframe src="https://www.youtube.com/embed/67stn7Pu7s4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-			<div class="video">
-				<video id="video" autoplay muted>
-					<source src="src/video.mp4" type="video/mp4">
-					지원하지 않는 브라우저입니다.
-				</video>
-				<div id="video-screen" data-state="hidden"></div>
-			</div>
-			<div id="video-controls" class="controls" data-state="hidden">
-				<div class="controls-top">
-					<button id="backward"><i class="fas fa-cog"></i></button>
-				</div>
-				<div class="controls-mid">
-					<button id="backward"><i class="fas fa-step-backward"></i></button>
-					<button id="playpause" type="button" data-state="pause">
-						<i class="fas fa-play" id="playbutton"></i>
-						<i class="fas fa-pause" id="pausebutton"></i>
-					</button>
-					<button id="forward"><i class="fas fa-step-forward"></i></button>
-				</div>
-				<div class="controls-bottom">
-					<span id="playtime"><span id="currentT"></span><span id="duration"></span></span>
-					<button id="fs" type="button" data-state="unfullscreen">
-						<i class="fas fa-expand" id="expand"></i><i class="fas fa-compress" id="compress"></i>
-					</button>
-				</div>
-			</div>
-			<div class="progress" data-state="hidden">
-				<div id="progress-bar-line">
-					<div id="progress-bar">
-						<div id="playhead"><div id="playhead-dot"></div></div>
+		<div class="watch-video-page">
+			<!-- 메인 컨텐츠 -->
+			<section class="main-contents">
+				<!-- 영상 -->
+				<section class=video-section>
+					<!-- <iframe src="https://www.youtube.com/embed/67stn7Pu7s4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+					<div class="video">
+						<video id="video" autoplay muted>
+							<source src="src/video.mp4" type="video/mp4">
+							지원하지 않는 브라우저입니다.
+						</video>
+						<div id="video-screen" data-state="hidden"></div>
 					</div>
-				</div>
-				<div class="player-storyboard" aria-hidden="true">
-					<img id="player-storyboard-image" alt="preview-image">
-					<div class="player-storyboard-metadata">
-						<div id="player-storyboard-title"></div>
-						<div id="player-storyboard-time"></div>
+					<div id="video-controls" class="controls" data-state="hidden">
+						<div class="controls-top">
+							<button id="backward"><i class="fas fa-cog"></i></button>
+						</div>
+						<div class="controls-mid">
+							<button id="backward"><i class="fas fa-step-backward"></i></button>
+							<button id="playpause" type="button" data-state="pause">
+								<i class="fas fa-play" id="playbutton"></i>
+								<i class="fas fa-pause" id="pausebutton"></i>
+							</button>
+							<button id="forward"><i class="fas fa-step-forward"></i></button>
+						</div>
+						<div class="controls-bottom">
+							<span id="playtime"><span id="currentT"></span><span id="duration"></span></span>
+							<button id="fs" type="button" data-state="unfullscreen">
+								<i class="fas fa-expand" id="expand"></i><i class="fas fa-compress" id="compress"></i>
+							</button>
+						</div>
 					</div>
-				</div>
-			</div>
-		</section>
+					<div class="progress" data-state="hidden">
+						<div id="progress-bar-line">
+							<div id="progress-bar">
+								<div id="playhead"><div id="playhead-dot"></div></div>
+							</div>
+						</div>
+						<div class="player-storyboard" aria-hidden="true">
+							<img id="player-storyboard-image" alt="preview-image">
+							<div class="player-storyboard-metadata">
+								<div id="player-storyboard-title"></div>
+								<div id="player-storyboard-time"></div>
+							</div>
+						</div>
+					</div>
+				</section>
 
-		<!-- 영상 정보 -->
-		<section class="info-section">
-			<div class="title-area">
-				<ul class="hashtag">
-					<li><a href="#">#해시태그</a></li>
-					<li><a href="#">#모바일유튜브</a></li>
-					<li><a href="#">#클론코딩</a></li>
-				</ul>
-				<a href="#" class="open-title">
-					<div>
-						<div class="title">영상 제목</div>
-						<div class="view">조회수 123만회</div>
+				<!-- 영상 정보 -->
+				<section class="info-section">
+					<div class="title-area">
+						<ul class="hashtag">
+							<li><a href="#">#해시태그</a></li>
+							<li><a href="#">#모바일유튜브</a></li>
+							<li><a href="#">#클론코딩</a></li>
+						</ul>
+						<a href="#" class="open-title">
+							<div>
+								<h1 class="title">영상 제목</h1>
+								<div class="view">조회수 123만회</div>
+							</div>
+							<i class="fas fa-chevron-down" id="down"></i>
+							<i class="fas fa-chevron-up" id="up"></i>
+						</a>
 					</div>
-					<i class="fas fa-chevron-down" id="down"></i>
-					<i class="fas fa-chevron-up" id="up"></i>
-				</a>
-			</div>
-			<ul class="video-buttons">
-				<li><a href="#" class="video-up"><i class="fas fa-thumbs-up"></i><div>1.2천</div></a></li>
-				<li><a href="#" class="video-down"><i class="fas fa-thumbs-down"></i><div>123</div></a></li>
-				<li><a href="#"><i class="fas fa-share"></i><div>공유</div></a></li>
-				<li><a href="#"><i class="fas fa-plus-square"></i><div>저장</div></a></li>
-				<li><a href="#"><i class="fas fa-flag"></i><div>신고</div></a></li>
-			</ul>
-			<div class="channel-area">
-				<a href="" class="channel">
-					<div class="channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
-					<div class="channel-info">
-						<div class="channel-title">한땀한땀 SEW CODING</div>
-						<div class="channel-subscriber">구독자 123만명</div>
-					</div>
-				</a>
-				<button class="channel-subscribe">구독</button>
-			</div>
-			<!-- 영상 상세정보 -->
-			<div class="video-contents">
-				<div>최초 공개: 2021. 6. 7.</div>
-				<div>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-					 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-					 Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget est
-					 lorem ipsum dolor sit. Volutpat odio facilisis mauris sit amet massa.
-					 Commodo odio aenean sed adipiscing diam donec adipiscing tristique.
-					 Mi eget mauris pharetra et. Non tellus orci ac auctor augue.
-					 Elit at imperdiet dui accumsan sit. Ornare arcu dui vivamus arcu felis.
-					 Egestas integer eget aliquet nibh praesent. In hac habitasse platea dictumst
-					 quisque sagittis purus. Pulvinar elementum integer enim neque volutpat ac.</br>
-					Senectus et netus et malesuada. Nunc pulvinar sapien et ligula ullamcorper malesuada proin.
-					 Neque convallis a cras semper auctor. Libero id faucibus nisl tincidunt eget. Leo a diam
-					 sollicitudin tempor id. A lacus vestibulum sed arcu non odio euismod lacinia. In tellus
-					 integer feugiat scelerisque. Feugiat in fermentum posuere urna nec tincidunt praesent.
-					 Porttitor rhoncus dolor purus non enim praesent elementum facilisis. Nisi scelerisque eu
-					 ultrices vitae auctor eu augue ut lectus. Ipsum faucibus vitae aliquet nec ullamcorper sit
-					 amet risus. Et malesuada fames ac turpis egestas sed. Sit amet nisl suscipit adipiscing bibendum
-					 est ultricies. Arcu ac tortor dignissim convallis aenean et tortor at. Pretium viverra
-					 suspendisse potenti nullam ac tortor vitae purus. Eros donec ac odio tempor orci dapibus
-					 ultrices. Elementum nibh tellus molestie nunc. Et magnis dis parturient montes nascetur.
-					 Est placerat in egestas erat imperdiet. Consequat interdum varius sit amet mattis vulputate enim.
-				</div>
-			</div>
-		</section>
-		<!-- 댓글 -->
-		<section class="comment-section">
-			<div class="comments-close">
-				<a href="#" class="open-comments">
-					<div>
-						<span class="comments-title">댓글</span>
-						<span class="comments-num"> • 999개</span>
-					</div>
-					<i class="fas fa-expand-alt"></i>
-				</a>
-			</div>
-			<div class="comments-open">
-				<div class="comments-header">
-					<span>댓글</span>
-					<a href="#" class="close-comments">&times;</a>
-				</div>
-				<div class="comments-body">
-					<div class="comments-add">
-						<div class="comments-input">
+					<ul class="video-buttons">
+						<li><a href="#" class="video-up"><i class="fas fa-thumbs-up"></i><div>1.2천</div></a></li>
+						<li><a href="#" class="video-down"><i class="fas fa-thumbs-down"></i><div>123</div></a></li>
+						<li><a href="#"><i class="fas fa-share"></i><div>공유</div></a></li>
+						<li><a href="#"><i class="fas fa-plus-square"></i><div>저장</div></a></li>
+						<li><a href="#"><i class="fas fa-flag"></i><div>신고</div></a></li>
+					</ul>
+					<div class="channel-area">
+						<a href="" class="channel">
 							<div class="channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
-							<div class="simple-textarea">
-								공개 댓글 추가…
+							<div class="channel-info">
+								<div class="channel-title">한땀한땀 SEW CODING</div>
+								<div class="channel-subscriber">구독자 123만명</div>
 							</div>
-							<textarea class="textarea" placeholder="공개 댓글 추가…" rows="4"></textarea>
-						</div>
-						<div class="comments-buttons">
-							<button type="reset">취소</button>
-							<button class="ok" type="submit">댓글</button>
+						</a>
+						<button class="channel-subscribe">구독</button>
+					</div>
+					<!-- 영상 상세정보 -->
+					<div class="video-contents">
+						<div>최초 공개: 2021. 6. 7.</div>
+						<div>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget est
+							lorem ipsum dolor sit. Volutpat odio facilisis mauris sit amet massa.
+							Commodo odio aenean sed adipiscing diam donec adipiscing tristique.
+							Mi eget mauris pharetra et. Non tellus orci ac auctor augue.
+							Elit at imperdiet dui accumsan sit. Ornare arcu dui vivamus arcu felis.
+							Egestas integer eget aliquet nibh praesent. In hac habitasse platea dictumst
+							quisque sagittis purus. Pulvinar elementum integer enim neque volutpat ac.</br>
+							Senectus et netus et malesuada. Nunc pulvinar sapien et ligula ullamcorper malesuada proin.
+							Neque convallis a cras semper auctor. Libero id faucibus nisl tincidunt eget. Leo a diam
+							sollicitudin tempor id. A lacus vestibulum sed arcu non odio euismod lacinia. In tellus
+							integer feugiat scelerisque. Feugiat in fermentum posuere urna nec tincidunt praesent.
+							Porttitor rhoncus dolor purus non enim praesent elementum facilisis. Nisi scelerisque eu
+							ultrices vitae auctor eu augue ut lectus. Ipsum faucibus vitae aliquet nec ullamcorper sit
+							amet risus. Et malesuada fames ac turpis egestas sed. Sit amet nisl suscipit adipiscing bibendum
+							est ultricies. Arcu ac tortor dignissim convallis aenean et tortor at. Pretium viverra
+							suspendisse potenti nullam ac tortor vitae purus. Eros donec ac odio tempor orci dapibus
+							ultrices. Elementum nibh tellus molestie nunc. Et magnis dis parturient montes nascetur.
+							Est placerat in egestas erat imperdiet. Consequat interdum varius sit amet mattis vulputate enim.
 						</div>
 					</div>
-					<ul class="comments-list">
-						<li class="comments-item">
-							<div class="comment">
-								<div class="channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
-								<div class="comment-text">
-									<div id="channel-title">채널 이름</div>
-									<div id="comment-content">이 곳에 댓글 내용이 적힙니다.</div>
-									<div id="comment-info"> 30분 전 • 
-										<a href="#"><i class="fas fa-thumbs-up"></i><span>123</span></a>
-										<a href="#"><i class="fas fa-thumbs-down"></i></a>
-										<a href="#"><i class="fas fa-comment-dots"></i><span>1</span></a>
-									</div>
-								</div>
-								<a href="#"><i class="fas fa-ellipsis-v"></i></a>
+				</section>
+
+				<!-- 댓글 -->
+				<section class="comment-section">
+					<div class="comments-close">
+						<a href="#" class="open-comments">
+							<div>
+								<span class="comments-title">댓글</span>
+								<span class="comments-num"> • 999개</span>
 							</div>
-							<button class="open-reply">답글 더보기</button>
+							<i class="fas fa-expand-alt"></i>
+						</a>
+					</div>
+					<div class="comments-open">
+						<div class="comments-header">
+							<span>댓글</span>
+							<a href="#" class="close-comments">&times;</a>
+						</div>
+						<div class="comments-body">
+							<div class="comments-add">
+								<div class="comments-input">
+									<div class="channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
+									<div class="simple-textarea">
+										공개 댓글 추가…
+									</div>
+									<textarea class="textarea" placeholder="공개 댓글 추가…" rows="4"></textarea>
+								</div>
+								<div class="comments-buttons">
+									<button type="reset">취소</button>
+									<button class="ok" type="submit">댓글</button>
+								</div>
+							</div>
+							<ul class="comments-list">
+								<li class="comments-item">
+									<div class="comment">
+										<div class="channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
+										<div class="comment-text">
+											<div id="channel-title">채널 이름</div>
+											<div id="comment-content">이 곳에 댓글 내용이 적힙니다.</div>
+											<div id="comment-info"> 30분 전 • 
+												<a href="#"><i class="fas fa-thumbs-up"></i><span>123</span></a>
+												<a href="#"><i class="fas fa-thumbs-down"></i></a>
+												<a href="#"><i class="fas fa-comment-dots"></i><span>1</span></a>
+											</div>
+										</div>
+										<a href="#"><i class="fas fa-ellipsis-v"></i></a>
+									</div>
+									<button class="open-reply">답글 더보기</button>
+								</li>
+								<li class="comments-item">
+									<div class="comment">
+										<div class="channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
+										<div class="comment-text">
+											<div id="channel-title">채널 이름</div>
+											<div id="comment-content">이 곳에 댓글 내용이 적힙니다.</div>
+											<div id="comment-info"> 30분 전 • 
+												<a href="#"><i class="fas fa-thumbs-up"></i><span>123</span></a>
+												<a href="#"><i class="fas fa-thumbs-down"></i></a>
+												<a href="#"><i class="fas fa-comment-dots"></i><span>1</span></a>
+											</div>
+										</div>
+										<a href="#"><i class="fas fa-ellipsis-v"></i></a>
+									</div>
+									<button class="open-reply">답글 더보기</button>
+								</li>
+								<li class="comments-item">
+									<div class="comment">
+										<div class="channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
+										<div class="comment-text">
+											<div id="channel-title">채널 이름</div>
+											<div id="comment-content">이 곳에 댓글 내용이 적힙니다.</div>
+											<div id="comment-info"> 30분 전 • 
+												<a href="#"><i class="fas fa-thumbs-up"></i><span>123</span></a>
+												<a href="#"><i class="fas fa-thumbs-down"></i></a>
+												<a href="#"><i class="fas fa-comment-dots"></i><span>1</span></a>
+											</div>
+										</div>
+										<a href="#"><i class="fas fa-ellipsis-v"></i></a>
+									</div>
+									<button class="open-reply">답글 더보기</button>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+			</section>
+
+			<!-- 사이드바 -->
+			<aside class="sidebar">
+				<section class="next-video-section">
+					<h3>다음 동영상</h3>
+					<ul class="next-video-list">
+						<li class="next-video-item">
+							<div class="next-video-thumbnail"><img src="src/thumbnail1.jpg" alt="영상 보기"></div>
+							<div class="next-video-meta">
+								<div class="next-video-info">
+									<div class="next-video-channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
+									<div class="title">
+										<div class="next-video-title">
+											Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+											sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+										</div>
+										<div class="channel-title">채널 이름 • 조회수 12만회</div>
+									</div>
+									<a href="#"><i class="fas fa-ellipsis-v"></i></a>
+								</div>
+							</div>
 						</li>
-						<li class="comments-item">
-							<div class="comment">
-								<div class="channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
-								<div class="comment-text">
-									<div id="channel-title">채널 이름</div>
-									<div id="comment-content">이 곳에 댓글 내용이 적힙니다.</div>
-									<div id="comment-info"> 30분 전 • 
-										<a href="#"><i class="fas fa-thumbs-up"></i><span>123</span></a>
-										<a href="#"><i class="fas fa-thumbs-down"></i></a>
-										<a href="#"><i class="fas fa-comment-dots"></i><span>1</span></a>
+						<li class="next-video-item">
+							<div class="next-video-thumbnail"><img src="src/thumbnail2.jpg" alt="영상 보기"></div>
+							<div class="next-video-meta">
+								<div class="next-video-info">
+									<div class="next-video-channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
+									<div class="title">
+										<div class="next-video-title">
+											Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+											sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+										</div>
+										<div class="channel-title">채널 이름 • 조회수 12만회</div>
 									</div>
+									<a href="#"><i class="fas fa-ellipsis-v"></i></a>
 								</div>
-								<a href="#"><i class="fas fa-ellipsis-v"></i></a>
 							</div>
-							<button class="open-reply">답글 더보기</button>
 						</li>
-						<li class="comments-item">
-							<div class="comment">
-								<div class="channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
-								<div class="comment-text">
-									<div id="channel-title">채널 이름</div>
-									<div id="comment-content">이 곳에 댓글 내용이 적힙니다.</div>
-									<div id="comment-info"> 30분 전 • 
-										<a href="#"><i class="fas fa-thumbs-up"></i><span>123</span></a>
-										<a href="#"><i class="fas fa-thumbs-down"></i></a>
-										<a href="#"><i class="fas fa-comment-dots"></i><span>1</span></a>
+						<li class="next-video-item">
+							<div class="next-video-thumbnail"><img src="src/thumbnail3.jpg" alt="영상 보기"></div>
+							<div class="next-video-meta">
+								<div class="next-video-info">
+									<div class="next-video-channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
+									<div class="title">
+										<div class="next-video-title">
+											Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+											sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+										</div>
+										<div class="channel-title">채널 이름 • 조회수 12만회</div>
 									</div>
+									<a href="#"><i class="fas fa-ellipsis-v"></i></a>
 								</div>
-								<a href="#"><i class="fas fa-ellipsis-v"></i></a>
 							</div>
-							<button class="open-reply">답글 더보기</button>
 						</li>
 					</ul>
-				</div>
-			</div>
-		</section>
-		<section class="next-video-section">
-			<h3>다음 동영상</h3>
-			<ul class="next-video-list">
-				<li class="next-video-item">
-					<div class="next-video-thumbnail"><img src="src/thumbnail1.jpg" alt="영상 보기"></div>
-					<div class="next-video-meta">
-						<div class="next-video-info">
-							<div class="next-video-channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
-							<div class="title">
-								<div class="next-video-title">
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-									sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-								</div>
-								<div class="channel-title">채널 이름 • 조회수 12만회</div>
-							</div>
-							<a href="#"><i class="fas fa-ellipsis-v"></i></a>
-						</div>
-					</div>
-				</li>
-				<li class="next-video-item">
-					<div class="next-video-thumbnail"><img src="src/thumbnail2.jpg" alt="영상 보기"></div>
-					<div class="next-video-meta">
-						<div class="next-video-info">
-							<div class="next-video-channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
-							<div class="title">
-								<div class="next-video-title">
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-									sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-								</div>
-								<div class="channel-title">채널 이름 • 조회수 12만회</div>
-							</div>
-							<a href="#"><i class="fas fa-ellipsis-v"></i></a>
-						</div>
-					</div>
-				</li>
-				<li class="next-video-item">
-					<div class="next-video-thumbnail"><img src="src/thumbnail3.jpg" alt="영상 보기"></div>
-					<div class="next-video-meta">
-						<div class="next-video-info">
-							<div class="next-video-channel-img"><img src="src/profile1.jpg" alt="채널 이동"></div>
-							<div class="title">
-								<div class="next-video-title">
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-									sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-								</div>
-								<div class="channel-title">채널 이름 • 조회수 12만회</div>
-							</div>
-							<a href="#"><i class="fas fa-ellipsis-v"></i></a>
-						</div>
-					</div>
-				</li>
-			</ul>
-		</section>
+				</section>
+			</aside>
+		</div>
 	</body>
 </html>

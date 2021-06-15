@@ -7,6 +7,11 @@
 	--text-red: #cc0000;
 	--blue: #065fd4;
 	--soft-white: #f4f4f4;
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	user-select:none;
 }
 
 body {
@@ -125,6 +130,7 @@ header > ul > li > a {
 }
 .title-area > .open-title > div > .title {
 	font-size: 14.2pt;
+	font-weight: 400;
 	margin: 5px 0;
 }
 .title-area > .open-title > div > .view {
@@ -434,4 +440,21 @@ header > ul > li > a {
 
 /* 큰 화면 - 댓글, 다음 동영상이 오른쪽에 위치 */
 @media screen and (min-width: 900px) {
+	.watch-video-page {
+		display: flex;
+	}
+	.watch-video-page > .main-contents {
+		flex: 1 1 70%;
+		overflow-y: scroll;
+	}
+	.watch-video-page > .sidebar {
+		flex: 1 1 30%;
+		overflow-y: scroll;
+	}
+
+	.video-section {
+		position: relative;
+		top: 0;
+		z-index: 0;
+	}
 }
