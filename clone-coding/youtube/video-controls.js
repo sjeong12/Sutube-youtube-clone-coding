@@ -17,11 +17,11 @@ let toastControls;
 controls.addEventListener('click', function(e) {
 	if (controls.getAttribute('data-state') == 'hidden')
 	{
+		clearTimeout(toastControls);
 		controls.setAttribute('data-state', 'visible');
 		progress.setAttribute('data-state', 'visible');
 		if (!video.paused)
 		{
-			clearTimeout(toastControls);
 			toastControls = setTimeout(function () {
 				controls.setAttribute('data-state', 'hidden');
 				progress.setAttribute('data-state', 'hidden');
@@ -39,6 +39,9 @@ var changeButtonState = function(type) {
 	if (type == 'playpause') {
 	   if (video.paused || video.ended) {
 		  playpause.setAttribute('data-state', 'pause');
+		  clearTimeout(toastControls);
+		controls.setAttribute('data-state', 'visible');
+		progress.setAttribute('data-state', 'visible');
 	   }
 	   else {
 		  playpause.setAttribute('data-state', 'play');
@@ -53,15 +56,14 @@ video.addEventListener('play', function() {
 }, false);
 video.addEventListener('pause', function() {
 	changeButtonState('playpause');
-	clearTimeout(toastControls);
 }, false);
 
 playpause.addEventListener('click', function(e) {
-	if (video.paused || video.ended) video.play();
+	if (video.paused || video.ended) {
+		video.play();
+	}
 	else {
 		video.pause();
-		controls.setAttribute('data-state', 'visible');
-		progress.setAttribute('data-state', 'visible');
 	}
 });
 
