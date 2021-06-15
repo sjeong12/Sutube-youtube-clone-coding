@@ -54,22 +54,31 @@ video.addEventListener('play', function() {
 video.addEventListener('pause', function() {
 	changeButtonState('playpause');
 	clearTimeout(toastControls);
-	controls.setAttribute('data-state', 'visible');
-	progress.setAttribute('data-state', 'visible');
 }, false);
 
 playpause.addEventListener('click', function(e) {
 	if (video.paused || video.ended) video.play();
-	else video.pause();
+	else {
+		video.pause();
+		controls.setAttribute('data-state', 'visible');
+		progress.setAttribute('data-state', 'visible');
+	}
 });
 
 progressBarLine.addEventListener('mousedown', function(e) {
 	function moveProgress(e) {
+		controls.setAttribute('data-state', 'screen');
 		// let pos = (e.pageX  - (progressBarLine.offsetLeft + progressBarLine.offsetParent.offsetLeft)) / progressBarLine.offsetWidth;
 		let pos = (e.pageX  - progressBarLine.offsetLeft) / progressBarLine.offsetWidth;
 		video.currentTime = pos * video.duration;
-		progressBar.style.width = video.currentTime / video.duration * 100 + "%";
-		storyboard.style.left = progressBar.style.width;
+		let width = video.currentTime / video.duration * 100;
+		progressBar.style.width = width + "%";
+		if (width < 20)
+			storyboard.style.left = "20%"
+		else if (width > 80)
+			storyboard.style.left = "80%"
+		else
+			storyboard.style.left = width + "%";
 		storyboardImage.src = getScreenshot(video, 0.35);
 		storyboardTime.innerText = getTime(new Date(video.currentTime * 1000));
 	}
@@ -77,25 +86,18 @@ progressBarLine.addEventListener('mousedown', function(e) {
 		videoScreen.setAttribute('data-state', 'hidden');
 		document.removeEventListener('mousemove', moveProgress);
 		if (video.paused)
-		{
-			changeButtonState('playpause');
 			video.play();
-		}
 		storyboard.setAttribute('aria-hidden', 'true');
 		progress.setAttribute('data-state', 'hidden');
 		controls.setAttribute('data-state', 'hidden');
 		document.removeEventListener('mouseup', upProgress);
 	}
 
-	moveProgress(e);
 	if (!video.paused)
-	{
-		changeButtonState('playpause');
 		video.pause();
-	}
+	moveProgress(e);
 	storyboard.setAttribute('aria-hidden', 'false');
 	progress.setAttribute('data-state', 'visible');
-	controls.setAttribute('data-state', 'screen');
 	videoScreen.setAttribute('data-state', 'visible');
 	videoScreen.style.backgroundImage = "url(" + getScreenshot(video, 1) + ")";
 	document.addEventListener('mousemove', moveProgress);
@@ -116,7 +118,6 @@ function getScreenshot(video, scale) {
 video.addEventListener("timeupdate", function(e) {
 	currentTime.innerText = getTime(new Date(this.currentTime * 1000));
 	progressBar.style.width = this.currentTime / this.duration * 100 + "%";
-	storyboard.style.left = progressBar.style.width;
 });
 
 fs.addEventListener("click", function(e) {
