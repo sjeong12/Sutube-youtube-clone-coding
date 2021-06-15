@@ -431,3 +431,7 @@ header > ul > li > a {
 	padding: 5px 0;
 	color: var(--text-grey)
 }
+
+/* 큰 화면 - 댓글, 다음 동영상이 오른쪽에 위치 */
+@media screen and (min-width: 900px) {
+}
