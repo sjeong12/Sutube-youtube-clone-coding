@@ -444,12 +444,13 @@ header > ul > li > a {
 		display: flex;
 	}
 	.watch-video-page > .main-contents {
+		height: 100vh;
 		flex: 1 1 70%;
-		overflow-y: scroll;
 	}
 	.watch-video-page > .sidebar {
+		height: 100vh;
 		flex: 1 1 30%;
-		overflow-y: scroll;
+		overflow-y: auto;
 	}
 
 	.video-section {
