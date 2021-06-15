@@ -3,6 +3,7 @@ const storyboard = document.querySelector(".player-storyboard");
 const storyboardImage = document.getElementById("player-storyboard-image");
 const storyboardTime = document.getElementById("player-storyboard-time");
 const video = document.getElementById("video");
+const videoScreen = document.getElementById("video-screen");
 const controls = document.getElementById("video-controls");
 const playpause = document.getElementById("playpause");
 const progress = document.querySelector(".progress");
@@ -81,6 +82,7 @@ progressBarLine.addEventListener('mousedown', function(e) {
 		storyboardTime.innerText = getTime(new Date(video.currentTime * 1000));
 	}
 	function upProgress(e) {
+		videoScreen.setAttribute('data-state', 'hidden');
 		document.removeEventListener('mousemove', moveProgress);
 		if (video.paused)
 		{
@@ -93,6 +95,8 @@ progressBarLine.addEventListener('mousedown', function(e) {
 		document.removeEventListener('mouseup', upProgress);
 	}
 
+	videoScreen.setAttribute('data-state', 'visible');
+	videoScreen.style.backgroundImage = "url(" + getScreenshot(video, 1) + ")";
 	moveProgress(e);
 	document.addEventListener('mousemove', moveProgress);
 	document.addEventListener('mouseup', upProgress);

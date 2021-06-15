@@ -27,11 +27,12 @@
 		<!-- 영상 -->
 		<section class=video-section>
 			<!-- <iframe src="https://www.youtube.com/embed/67stn7Pu7s4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-			<div class="video-screen">
+			<div class="video">
 				<video id="video" autoplay muted>
 					<source src="src/video.mp4" type="video/mp4">
 					지원하지 않는 브라우저입니다.
 				</video>
+				<div id="video-screen" data-state="hidden"></div>
 			</div>
 			<div id="video-controls" class="controls" data-state="hidden">
 				<div class="controls-top">
