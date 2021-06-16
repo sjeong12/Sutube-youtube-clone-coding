@@ -18,10 +18,10 @@ openTitle.addEventListener("click", () => {
 });
 
 openComments.addEventListener("click", () => {
-	infoSection.classList.toggle("open-comments");
-	commentsClose.classList.toggle("open-comments");
-	commentsOpen.classList.toggle("open-comments");
-	nextSection.classList.toggle("open-comments");
+	infoSection.classList.add("open-comments");
+	commentsClose.classList.add("open-comments");
+	commentsOpen.classList.add("open-comments");
+	nextSection.classList.add("open-comments");
 });
 closeComments.addEventListener("click", () => {
 	infoSection.classList.remove("open-comments");

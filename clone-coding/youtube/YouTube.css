@@ -441,10 +441,22 @@ header > ul > li > a {
 /* 큰 화면 - 댓글, 다음 동영상이 오른쪽에 위치 */
 @media screen and (min-width: 900px) {
 	body > section {
+		width: -webkit-calc(100% - 256px);
+		width: calc(100% - 256px);
 		display: block;
+		position: relative;
 		margin-right: 256px;
 	}
 
+	/* 영상 */
+	.video-section {
+		width: -webkit-calc(100% - 256px);
+		width: calc(100% - 256px);
+		top: 0;
+		z-index: 0;
+	}
+
+	/* 다음 영상 */
 	.next-video-section {
 		width: 240px;
 		height: -webkit-calc(100% - 48px);
@@ -463,11 +475,35 @@ header > ul > li > a {
 		margin: 12px 0;
 	}
 
-	.video-section {
+	/* 열린 덧글 */
+	.next-video-section.open-comments {
+		display: none;
+	}
+	.info-section.open-comments {
 		width: -webkit-calc(100% - 256px);
 		width: calc(100% - 256px);
+		display: block;
 		position: relative;
-		top: 0;
-		z-index: 0;
+		margin-right: 256px;
+	}
+	.comments-close.open-comments {
+		width: -webkit-calc(100% - 256px);
+		width: calc(100% - 256px);
+		display: block;
+		position: relative;
+		margin-right: 256px;
+	}
+	.comments-open.open-comments {
+		width: 256px;
+		height: -webkit-calc(100% - 48px);
+		height: calc(100% - 48px);
+		position: fixed;
+		right: 0;
+		top: 48px;
+		bottom: 0;
+		overflow-y: auto;
+	}
+	.comments-header {
+		width: 256px;
 	}
 }
