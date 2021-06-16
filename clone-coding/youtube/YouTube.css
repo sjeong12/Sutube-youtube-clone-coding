@@ -440,20 +440,32 @@ header > ul > li > a {
 
 /* 큰 화면 - 댓글, 다음 동영상이 오른쪽에 위치 */
 @media screen and (min-width: 900px) {
-	.watch-video-page {
-		display: flex;
+	body > section {
+		display: block;
+		margin-right: 256px;
 	}
-	.watch-video-page > .main-contents {
-		height: 100vh;
-		flex: 1 1 70%;
-	}
-	.watch-video-page > .sidebar {
-		height: 100vh;
-		flex: 1 1 30%;
+
+	.next-video-section {
+		width: 240px;
+		height: -webkit-calc(100% - 48px);
+		height: calc(100% - 48px);
+		position: fixed;
+		right: 0;
+		top: 48px;
+		bottom: 0;
+		padding: 4px 8px 8px 8px;
 		overflow-y: auto;
+	}
+	.next-video-section > h3 {
+		margin: 12px;
+	}
+	.next-video-section > .next-video-list > .next-video-item {
+		margin: 12px 0;
 	}
 
 	.video-section {
+		width: -webkit-calc(100% - 256px);
+		width: calc(100% - 256px);
 		position: relative;
 		top: 0;
 		z-index: 0;

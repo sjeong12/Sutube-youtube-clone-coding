@@ -11,7 +11,7 @@
 	align-items: center;
 	background: rgba(0, 0, 0, 40%);
 	opacity: 0;
-	transition: opacity .5s;
+	transition: opacity 700ms;
 }
 .controls[data-state=visible] {
 	opacity: 1;
