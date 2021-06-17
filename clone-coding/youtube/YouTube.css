@@ -438,6 +438,23 @@ header > ul > li > a {
 	color: var(--text-grey)
 }
 
+/* 중간 화면 - 다음 동영상 2xn 배치 */
+@media screen and (min-width: 550px) {
+	.next-video-section {
+		padding: 0;
+	}
+	.next-video-section > h3 {
+		padding-top: 8px;
+	}
+	.next-video-section > .next-video-list > .next-video-item {
+		width:49.5%;
+		display: inline-block;
+		box-sizing: border-box;
+		padding: 8px;
+		margin: 0;
+	}
+}
+
 /* 큰 화면 - 댓글, 다음 동영상이 오른쪽에 위치 */
 @media screen and (min-width: 900px) {
 	body > section {
@@ -473,7 +490,13 @@ header > ul > li > a {
 	.next-video-section > h3 {
 		margin: 12px;
 	}
+	.next-video-section > .next-video-list {
+		width: 100%;
+	}
 	.next-video-section > .next-video-list > .next-video-item {
+		width: 100%;
+		display: block;
+		padding: 0;
 		margin: 12px 0;
 	}
 
