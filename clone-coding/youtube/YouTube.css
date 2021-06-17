@@ -488,6 +488,7 @@ header > ul > li > a {
 		overflow-y: auto;
 	}
 	.next-video-section > h3 {
+		padding: 0;
 		margin: 12px;
 	}
 	.next-video-section > .next-video-list {
