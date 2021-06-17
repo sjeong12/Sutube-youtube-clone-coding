@@ -5,6 +5,7 @@ const storyboardTime = document.getElementById("player-storyboard-time");
 const video = document.getElementById("video");
 const videoScreen = document.getElementById("video-screen");
 const controls = document.getElementById("video-controls");
+const unmuteText = document.getElementById("alert-unmute");
 const playpause = document.getElementById("playpause");
 const progress = document.querySelector(".progress");
 const progressBarLine = document.getElementById("progress-bar-line");
@@ -13,9 +14,25 @@ const fs = document.getElementById("fs");
 const currentTime = document.getElementById("currentT");
 const duration = document.getElementById("duration");
 
-let toastControls;
-controls.addEventListener('click', function(e) {
+let alertUnmute = setTimeout(function () {
+	unmuteText.setAttribute('data-state', 'small');
+}, 4000);
+
+function unmute() {
 	video.muted = false;
+	clearTimeout(alertUnmute);
+	unmuteText.setAttribute('data-state', 'hidden');
+}
+
+unmuteText.addEventListener('click', unmute);
+
+let toastControls;
+controls.addEventListener('click', function() {
+	if (video.muted)
+	{
+		unmute();
+		return ;
+	}
 	if (controls.getAttribute('data-state') == 'hidden')
 	{
 		clearTimeout(toastControls);
@@ -47,9 +64,7 @@ var changeButtonState = function(type) {
 				progress.setAttribute('data-state', 'visible');
 			}
 		}
-		else {
-			playpause.setAttribute('data-state', 'play');
-	   }
+		else playpause.setAttribute('data-state', 'play');
 	}
 }
 

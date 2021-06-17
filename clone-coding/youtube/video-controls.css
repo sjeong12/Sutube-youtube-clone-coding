@@ -27,6 +27,49 @@
 }
 
 
+#alert-unmute {
+	position: absolute;
+	top: 0;
+	left: 0;
+    z-index: 2;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+    text-transform: uppercase;
+    color: #000;
+    font-size: 100%;
+    font-weight: 500;
+    margin: 12px;
+	padding: 8px 12px;
+    background-color: white;
+    border-radius: 2px;
+    border-bottom: 1px solid #f1f1f1;
+    text-shadow: none;
+	cursor: pointer;
+}
+#alert-unmute > span {
+	max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    display: inline-block;
+	padding-left: 8px;
+	transition: max-width 700ms;
+}
+#alert-unmute > i {
+	font-size: 135%;
+	display: inline-block;
+    vertical-align: middle;
+}
+#alert-unmute[data-state=small] > span {
+	max-width: 0;
+	padding-left: 0;
+}
+#alert-unmute[data-state=hidden] {
+	display: none;
+}
+
 .controls-top {
 	width: 100%;
 	display: none;
