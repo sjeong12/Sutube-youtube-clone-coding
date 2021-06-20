@@ -14,18 +14,18 @@ const fs = document.getElementById("fs");
 const currentTime = document.getElementById("currentT");
 const duration = document.getElementById("duration");
 
+// 음소거 해제
 let alertUnmute = setTimeout(function () {
 	unmuteText.setAttribute('data-state', 'small');
 }, 4000);
-
 function unmute() {
 	video.muted = false;
 	clearTimeout(alertUnmute);
 	unmuteText.setAttribute('data-state', 'hidden');
 }
-
 unmuteText.addEventListener('click', unmute);
 
+// 비디오 컨트롤
 let toastControls;
 controls.addEventListener('click', function() {
 	if (video.muted)
@@ -53,6 +53,7 @@ controls.addEventListener('click', function() {
 	}
 });
 
+// 비디오 play/pause
 var changeButtonState = function(type) {
 	if (type == 'playpause') {
 		if (video.paused || video.ended) {
@@ -67,7 +68,6 @@ var changeButtonState = function(type) {
 		else playpause.setAttribute('data-state', 'play');
 	}
 }
-
 video.addEventListener('play', function() {
 	changeButtonState('playpause');
 	currentTime.innerText = getTime(new Date(this.currentTime * 1000));
@@ -76,15 +76,14 @@ video.addEventListener('play', function() {
 video.addEventListener('pause', function() {
 	changeButtonState('playpause');
 }, false);
-
 playpause.addEventListener('click', function(e) {
 	if (video.paused || video.ended) video.play();
 	else video.pause();
 });
 
+// 비디오 progress bar 조작
 progressBarLine.addEventListener('mousedown', function(e) {
 	function moveProgress(e) {
-		// let pos = (e.pageX  - (progressBarLine.offsetLeft + progressBarLine.offsetParent.offsetLeft)) / progressBarLine.offsetWidth;
 		let pos = (e.pageX  - progressBarLine.offsetLeft) / progressBarLine.offsetWidth;
 		video.currentTime = pos * video.duration;
 		let width = video.currentTime / video.duration * 100;
@@ -121,6 +120,7 @@ progressBarLine.addEventListener('mousedown', function(e) {
 	document.addEventListener('mouseup', upProgress);
 });
 
+// progress bar 스토리보드 이미지 생성
 function getScreenshot(video, scale) {
 	scale = scale || 1;
 
@@ -132,11 +132,18 @@ function getScreenshot(video, scale) {
 	return canvas.toDataURL();
 }
 
+// 비디오와 progress bar 시간 연동
 video.addEventListener("timeupdate", function(e) {
 	currentTime.innerText = getTime(new Date(this.currentTime * 1000));
 	progressBar.style.width = this.currentTime / this.duration * 100 + "%";
 });
+function getTime(time) {
+	let minute = ("0" + time.getMinutes()).slice(-2);
+	let second = ("0" + time.getSeconds()).slice(-2);
+	return (minute + ':' + second);
+}
 
+// 전체화면
 fs.addEventListener("click", function(e) {
 	if (isFullScreen()) {
 		if (document.exitFullscreen) document.exitFullscreen();
@@ -161,17 +168,9 @@ fs.addEventListener("click", function(e) {
 			fs.setAttribute('data-state', 'fullscreen');
 	}
 });
-
 function isFullScreen() {
 	return !!(document.fullscreen || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement || document.fullscreenElement);
 }
-
 function setFullscreenData(state) {
 	document.body.setAttribute('data-fullscreen', !!state);
-}
-
-function getTime(time) {
-	let minute = ("0" + time.getMinutes()).slice(-2);
-	let second = ("0" + time.getSeconds()).slice(-2);
-	return (minute + ':' + second);
 }
