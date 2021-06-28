@@ -81,6 +81,7 @@ header > ul > li > a {
 /* video */
 .video-section {
 	width: 100%;
+	height: fit-content;
 	position: sticky;
 	top: 48px;
 	z-index: 1;

@@ -1,0 +1,51 @@
+.ad-in-video {
+	width: 80%;
+	height: 80%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.ad-in-video button {
+	position: absolute;
+	right: 0;
+	padding: 12px;
+	font-size: 10pt;
+	background: transparent;
+	border-style: none;
+}
+.ad-in-video > div {
+	background: whitesmoke;
+}
+
+.ad-in-video > .ad1 {
+	width: 45%;
+	height: 45%;
+	position: absolute;
+	left: 0;
+}
+.ad-in-video > .ad2 {
+	width: 45%;
+	height: 45%;
+	position: absolute;
+	right: 0;
+}
+.ad-in-video > .ad3 {
+	width: 100%;
+	height: 45%;
+	position: absolute;
+	bottom: 0;
+}
+
+.ad1[data-state="hidden"] {
+	display: none;
+}
+.ad2[data-state="hidden"] {
+	display: none;
+}
+.ad3[data-state="hidden"] {
+	display: none;
+}

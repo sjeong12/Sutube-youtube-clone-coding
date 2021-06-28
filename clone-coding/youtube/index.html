@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width:device-width">
 		<link rel="stylesheet" href="YouTube.css">
 		<link rel="stylesheet" href="video-controls.css">
+		<link rel="stylesheet" href="ad.css">
 		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css' integrity='sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==' crossorigin='anonymous'/>
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
@@ -33,6 +34,13 @@
 				</video>
 				<div id="video-screen" data-state="hidden"></div>
 			</div>
+			<!-- 광고 -->
+			<div class="ad-in-video">
+				<div class="ad1" data-state="hidden"><button>&times;</button></div>
+				<div class="ad2" data-state="hidden"><button>&times;</button></div>
+				<!-- <div class="ad3" data-state="hidden"><button>&times;</button></div> -->
+			</div>
+			<!-- 비디오 컨트롤 -->
 			<div id="alert-unmute" data-state="full">
 				<i class="fas fa-volume-mute"></i>
 				<span>탭하여 음소거 해제</span>
@@ -69,13 +77,6 @@
 						<div id="player-storyboard-time"></div>
 					</div>
 				</div>
-			</div>
-			<div class="ad-in-video">
-				<div>
-					<div></div>
-					<div></div>
-				</div>
-				<div></div>
 			</div>
 		</section>
 

@@ -133,14 +133,57 @@ function getScreenshot(video, scale) {
 }
 
 // 비디오와 progress bar 시간 연동
+const ad1 = document.querySelector(".ad1");
+const ad2 = document.querySelector(".ad2");
+// const ad3 = document.querySelector(".ad3");
+let isAlreadyShown = 0;
 video.addEventListener("timeupdate", function(e) {
 	currentTime.innerText = getTime(new Date(this.currentTime * 1000));
 	progressBar.style.width = this.currentTime / this.duration * 100 + "%";
+
+	showAd(this.currentTime, this.duration);
 });
 function getTime(time) {
 	let minute = ("0" + time.getMinutes()).slice(-2);
 	let second = ("0" + time.getSeconds()).slice(-2);
 	return (minute + ':' + second);
+}
+
+function showAd(current, duration) {
+	if (isAlreadyShown < 1 && current > (duration - 10) * 1/3)
+	{
+		isAlreadyShown++;
+		ad1.setAttribute('data-state', 'visible');
+		setTimeout(function () {
+			ad1.setAttribute('data-state', 'hidden');
+		}, 5000);
+	}
+	if (isAlreadyShown < 2 && current > (duration - 10) * 2/3)
+	{
+		isAlreadyShown++;
+		ad2.setAttribute('data-state', 'visible');
+		setTimeout(function () {
+			ad2.setAttribute('data-state', 'hidden');
+		}, 5000);
+	}
+	if (isAlreadyShown < 3 && current > (duration - 10) * 1)
+	{
+		isAlreadyShown++;
+		const ad3 = getNewAd();
+		ad3.setAttribute('data-state', 'visible');
+		setTimeout(function () {
+			ad3.setAttribute('data-state', 'hidden');
+		}, 10000);
+	}
+}
+function getNewAd() {
+	let ad = document.createElement('div');
+
+	ad.className = 'ad3';
+	ad.setAttribute('data-state', 'hidden');
+	ad.innerHTML = '<button>&times;</button>';
+	document.querySelector(".ad-in-video").append(ad);
+	return ad//->  array에 넣기
 }
 
 // 전체화면
