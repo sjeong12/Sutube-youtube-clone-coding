@@ -133,9 +133,6 @@ function getScreenshot(video, scale) {
 }
 
 // 비디오와 progress bar 시간 연동
-const ad1 = document.querySelector(".ad1");
-const ad2 = document.querySelector(".ad2");
-// const ad3 = document.querySelector(".ad3");
 let isAlreadyShown = 0;
 video.addEventListener("timeupdate", function(e) {
 	currentTime.innerText = getTime(new Date(this.currentTime * 1000));
@@ -148,42 +145,43 @@ function getTime(time) {
 	let second = ("0" + time.getSeconds()).slice(-2);
 	return (minute + ':' + second);
 }
-
+//광고 보여주기
 function showAd(current, duration) {
-	if (isAlreadyShown < 1 && current > (duration - 10) * 1/3)
+	const totalAdNum = 3;
+	const shortAdTime = 5000;
+	const longAdTime = 10000;
+
+	for (let num = 1; num <= totalAdNum; num++)
 	{
-		isAlreadyShown++;
-		ad1.setAttribute('data-state', 'visible');
-		setTimeout(function () {
-			ad1.setAttribute('data-state', 'hidden');
-		}, 5000);
-	}
-	if (isAlreadyShown < 2 && current > (duration - 10) * 2/3)
-	{
-		isAlreadyShown++;
-		ad2.setAttribute('data-state', 'visible');
-		setTimeout(function () {
-			ad2.setAttribute('data-state', 'hidden');
-		}, 5000);
-	}
-	if (isAlreadyShown < 3 && current > (duration - 10) * 1)
-	{
-		isAlreadyShown++;
-		const ad3 = getNewAd();
-		ad3.setAttribute('data-state', 'visible');
-		setTimeout(function () {
-			ad3.setAttribute('data-state', 'hidden');
-		}, 10000);
+		if (isAlreadyShown < num && current > (duration - longAdTime/1000) * num/3)
+		{
+			isAlreadyShown++;
+			const ad = getNewAd(isAlreadyShown);
+			let time;
+			if (isAlreadyShown == 3)
+				time = longAdTime;
+			else time = shortAdTime;
+			ad.setAttribute('data-state', 'visible');
+			setTimeout(function () {
+				ad.setAttribute('data-state', 'hidden');
+			}, time);
+		}
 	}
 }
-function getNewAd() {
+//광고 생성
+function getNewAd(id) {
 	let ad = document.createElement('div');
+	let close = document.createElement('button');
 
-	ad.className = 'ad3';
+	ad.className = 'ad' + id;
 	ad.setAttribute('data-state', 'hidden');
-	ad.innerHTML = '<button>&times;</button>';
+	close.innerHTML = '&times;';
+	close.addEventListener("click", function() {
+		ad.setAttribute('data-state', 'hidden');
+	});
 	document.querySelector(".ad-in-video").append(ad);
-	return ad//->  array에 넣기
+	document.querySelector("."+ad.className).append(close);
+	return ad;
 }
 
 // 전체화면
