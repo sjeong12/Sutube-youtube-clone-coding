@@ -156,11 +156,18 @@ function showAd(current, duration) {
 		if (isAlreadyShown < num && current > (duration - longAdTime/1000) * num/3)
 		{
 			isAlreadyShown++;
-			const ad = getNewAd(isAlreadyShown);
+			let ad;
 			let time;
 			if (isAlreadyShown == 3)
+			{
 				time = longAdTime;
-			else time = shortAdTime;
+				ad = getNewAd("wide");
+			}
+			else {
+				time = shortAdTime;
+				ad = getNewAd("small");
+			}
+			console.log("isAlreadyshown:"+isAlreadyShown);
 			ad.setAttribute('data-state', 'visible');
 			setTimeout(function () {
 				ad.setAttribute('data-state', 'hidden');
@@ -169,20 +176,38 @@ function showAd(current, duration) {
 	}
 }
 //광고 생성
-function getNewAd(id) {
+let isLeftAd = true;
+function getNewAd(type) {
 	let ad = document.createElement('div');
 	let close = document.createElement('button');
 
-	ad.className = 'ad' + id;
+	ad.className = 'ad-in-video ' + type + "-ad";
 	ad.setAttribute('data-state', 'hidden');
+	if (type == "small")
+	{
+		ad.style.top = "20px";
+		if (isLeftAd)
+			ad.style.left = "20px";
+		else
+			ad.style.right = "20px";
+		isLeftAd = !isLeftAd;
+	}
+	else if (type == "wide")
+	{
+		ad.style.bottom = "20px";
+		isLeftAd = true;
+	}
+	close.className = 'close-ad-button';
 	close.innerHTML = '&times;';
 	close.addEventListener("click", function() {
 		ad.setAttribute('data-state', 'hidden');
 	});
-	document.querySelector(".ad-in-video").append(ad);
-	document.querySelector("."+ad.className).append(close);
+	videoSection.append(ad);
+	ad.append(close);
 	return ad;
 }
+// function setAdStyle(type, posX, posY) {
+// }
 
 // 전체화면
 fs.addEventListener("click", function(e) {

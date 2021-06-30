@@ -1,51 +1,41 @@
-.ad-in-video {
-	width: 80%;
-	height: 80%;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+:root {
+	--ad-in-video-margin: 20px;
 }
-.ad-in-video button {
+
+/* ad in video */
+.close-ad-button {
 	position: absolute;
 	right: 0;
-	padding: 12px;
+	margin: 4px;
 	font-size: 10pt;
+	color: #fff;
 	background: transparent;
 	border-style: none;
 }
-.ad-in-video > div {
-	background: whitesmoke;
+.ad-in-video {
+	display: none;
+}
+.ad-in-video[data-state="visible"]{
+	display: block;
+	position: absolute;
+	background: #000;
 }
 
-.ad-in-video > .ad1 {
-	width: 45%;
-	height: 45%;
-	position: absolute;
-	left: 0;
+.small-ad {
+	width: 30%;
+	height: 20%;
 }
-.ad-in-video > .ad2 {
-	width: 45%;
-	height: 45%;
-	position: absolute;
-	right: 0;
+.wide-ad {
+	height: 20%;
+	left: var(--ad-in-video-margin);
+	right: var(--ad-in-video-margin);
 }
-.ad-in-video > .ad3 {
+
+/* ad under video */
+/* .ad-under-video {
 	width: 100%;
-	height: 45%;
+	height: 100%
 	position: absolute;
-	bottom: 0;
-}
-
-.ad1[data-state="hidden"] {
-	display: none;
-}
-.ad2[data-state="hidden"] {
-	display: none;
-}
-.ad3[data-state="hidden"] {
-	display: none;
-}
+	top: -4px;
+	background: chartreuse;
+} */

@@ -200,6 +200,7 @@ header > ul > li > a {
 
 /* video-contents */
 .video-contents {
+	height: fit-content;
 	display: none;
 }
 .video-contents.open {
