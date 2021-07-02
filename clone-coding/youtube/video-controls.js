@@ -138,7 +138,7 @@ video.addEventListener("timeupdate", function(e) {
 	currentTime.innerText = getTime(new Date(this.currentTime * 1000));
 	progressBar.style.width = this.currentTime / this.duration * 100 + "%";
 
-	showAd(this.currentTime, this.duration);
+	showAdInVideo(this.currentTime, this.duration);
 });
 function getTime(time) {
 	let minute = ("0" + time.getMinutes()).slice(-2);
@@ -146,19 +146,24 @@ function getTime(time) {
 	return (minute + ':' + second);
 }
 //광고 보여주기
-function showAd(current, duration) {
-	const totalAdNum = 3;
+function showAdInVideo(current, duration) {
+	const totalAdNum = 5;
 	const shortAdTime = 5000;
 	const longAdTime = 10000;
 
 	for (let num = 1; num <= totalAdNum; num++)
 	{
-		if (isAlreadyShown < num && current > (duration - longAdTime/1000) * num/3)
+		if (isAlreadyShown < num && current > (duration - longAdTime/1000) * num/5)
 		{
 			isAlreadyShown++;
 			let ad;
 			let time;
-			if (isAlreadyShown == 3)
+			if (num % 2 == 0)
+			{
+				time = shortAdTime;
+				ad = getNewAdUnderVideo();
+			}
+			else if (isAlreadyShown == 5)
 			{
 				time = longAdTime;
 				ad = getNewAd("wide");
@@ -206,8 +211,21 @@ function getNewAd(type) {
 	ad.append(close);
 	return ad;
 }
-// function setAdStyle(type, posX, posY) {
-// }
+function getNewAdUnderVideo() {
+	let ad = document.createElement('div');
+	let close = document.createElement('button');
+
+	ad.className = "under-ad";
+	ad.setAttribute('data-state', 'hidden');
+	close.className = 'close-ad-button';
+	close.innerHTML = '&times;';
+	close.addEventListener("click", function() {
+		ad.setAttribute('data-state', 'hidden');
+	});
+	document.querySelector(".ad-under-video").append(ad);
+	ad.append(close);
+	return ad;
+}
 
 // 전체화면
 fs.addEventListener("click", function(e) {

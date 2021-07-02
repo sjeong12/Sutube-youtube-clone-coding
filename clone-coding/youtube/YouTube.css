@@ -106,6 +106,12 @@ header > ul > li > a {
 	display: block;
 }
 
+/* info */
+.info-section {
+	display: block;
+	position: relative;
+}
+
 /* title-area */
 .title-area {
 	margin: 10px;
