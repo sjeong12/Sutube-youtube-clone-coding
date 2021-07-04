@@ -175,7 +175,8 @@ function showAdInVideo(current, duration) {
 			console.log("isAlreadyshown:"+isAlreadyShown);
 			ad.setAttribute('data-state', 'visible');
 			setTimeout(function () {
-				ad.setAttribute('data-state', 'hidden');
+				//ad.setAttribute('data-state', 'hidden');
+				ad.parentNode.removeChild(ad);
 			}, time);
 		}
 	}
@@ -205,7 +206,8 @@ function getNewAd(type) {
 	close.className = 'close-ad-button';
 	close.innerHTML = '&times;';
 	close.addEventListener("click", function() {
-		ad.setAttribute('data-state', 'hidden');
+		// ad.setAttribute('data-state', 'hidden');
+		ad.parentNode.removeChild(ad);
 	});
 	videoSection.append(ad);
 	ad.append(close);
@@ -215,14 +217,15 @@ function getNewAdUnderVideo() {
 	let ad = document.createElement('div');
 	let close = document.createElement('button');
 
-	ad.className = "under-ad";
+	ad.className = "ad-under-video";
 	ad.setAttribute('data-state', 'hidden');
 	close.className = 'close-ad-button';
 	close.innerHTML = '&times;';
 	close.addEventListener("click", function() {
-		ad.setAttribute('data-state', 'hidden');
+		// ad.setAttribute('data-state', 'hidden');
+		ad.parentNode.removeChild(ad);
 	});
-	document.querySelector(".ad-under-video").append(ad);
+	document.querySelector(".info-section").append(ad);
 	ad.append(close);
 	return ad;
 }

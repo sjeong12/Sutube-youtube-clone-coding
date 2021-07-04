@@ -32,20 +32,15 @@
 }
 
 /* ad under video */
-.ad-under-video {
+.ad-under-video[data-state="visible"]{
 	width: 100%;
 	height: 100%;
-	position: absolute;
-	top: -10px;
-	padding-bottom: 10px;
-}
-
-.ad-under-video > .under-ad[data-state="visible"] {
 	display: block;
-	width: 100%;
-	height: 100%;
+	position: absolute;
+	top: 0;
+	padding-bottom: 10px;
 	background: #000;
 }
-.ad-under-video > .under-ad {
+.ad-under-video{
 	display: none;
 }
