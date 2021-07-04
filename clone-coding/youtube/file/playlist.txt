@@ -1,0 +1,3 @@
+http://localhost:8080/video1
+http://localhost:8080/video2
+http://localhost:8080/video3
