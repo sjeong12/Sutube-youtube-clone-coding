@@ -172,7 +172,6 @@ function showAdInVideo(current, duration) {
 				time = shortAdTime;
 				ad = getNewAd("small");
 			}
-			console.log("isAlreadyshown:"+isAlreadyShown);
 			ad.setAttribute('data-state', 'visible');
 			setTimeout(function () {
 				//ad.setAttribute('data-state', 'hidden');
