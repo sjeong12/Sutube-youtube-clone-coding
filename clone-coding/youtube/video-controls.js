@@ -1,3 +1,6 @@
+import { playNextVideo } from './playlist.js';
+import { showAdInVideo } from './ad.js';
+
 const videoSection = document.querySelector(".video-section");
 const storyboard = document.querySelector(".player-storyboard");
 const storyboardImage = document.getElementById("player-storyboard-image");
@@ -75,6 +78,7 @@ video.addEventListener('play', function() {
 }, false);
 video.addEventListener('pause', function() {
 	changeButtonState('playpause');
+	if (video.ended) playNextVideo();
 }, false);
 playpause.addEventListener('click', function(e) {
 	if (video.paused || video.ended) video.play();
@@ -128,12 +132,10 @@ function getScreenshot(video, scale) {
 	canvas.width = video.clientWidth * scale;
 	canvas.height = video.clientHeight * scale;
 	canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-	//image.crossOrigin = 'Anonymous';
 	return canvas.toDataURL();
 }
 
 // 비디오와 progress bar 시간 연동
-let isAlreadyShown = 0;
 video.addEventListener("timeupdate", function(e) {
 	currentTime.innerText = getTime(new Date(this.currentTime * 1000));
 	progressBar.style.width = this.currentTime / this.duration * 100 + "%";
@@ -144,89 +146,6 @@ function getTime(time) {
 	let minute = ("0" + time.getMinutes()).slice(-2);
 	let second = ("0" + time.getSeconds()).slice(-2);
 	return (minute + ':' + second);
-}
-//광고 보여주기
-function showAdInVideo(current, duration) {
-	const totalAdNum = 5;
-	const shortAdTime = 5000;
-	const longAdTime = 10000;
-
-	for (let num = 1; num <= totalAdNum; num++)
-	{
-		if (isAlreadyShown < num && current > (duration - longAdTime/1000) * num/5)
-		{
-			isAlreadyShown++;
-			let ad;
-			let time;
-			if (num % 2 == 0)
-			{
-				time = shortAdTime;
-				ad = getNewAdUnderVideo();
-			}
-			else if (isAlreadyShown == 5)
-			{
-				time = longAdTime;
-				ad = getNewAd("wide");
-			}
-			else {
-				time = shortAdTime;
-				ad = getNewAd("small");
-			}
-			ad.setAttribute('data-state', 'visible');
-			setTimeout(function () {
-				//ad.setAttribute('data-state', 'hidden');
-				ad.parentNode.removeChild(ad);
-			}, time);
-		}
-	}
-}
-//광고 생성
-let isLeftAd = true;
-function getNewAd(type) {
-	let ad = document.createElement('div');
-	let close = document.createElement('button');
-
-	ad.className = 'ad-in-video ' + type + "-ad";
-	ad.setAttribute('data-state', 'hidden');
-	if (type == "small")
-	{
-		ad.style.top = "20px";
-		if (isLeftAd)
-			ad.style.left = "20px";
-		else
-			ad.style.right = "20px";
-		isLeftAd = !isLeftAd;
-	}
-	else if (type == "wide")
-	{
-		ad.style.bottom = "20px";
-		isLeftAd = true;
-	}
-	close.className = 'close-ad-button';
-	close.innerHTML = '&times;';
-	close.addEventListener("click", function() {
-		// ad.setAttribute('data-state', 'hidden');
-		ad.parentNode.removeChild(ad);
-	});
-	videoSection.append(ad);
-	ad.append(close);
-	return ad;
-}
-function getNewAdUnderVideo() {
-	let ad = document.createElement('div');
-	let close = document.createElement('button');
-
-	ad.className = "ad-under-video";
-	ad.setAttribute('data-state', 'hidden');
-	close.className = 'close-ad-button';
-	close.innerHTML = '&times;';
-	close.addEventListener("click", function() {
-		// ad.setAttribute('data-state', 'hidden');
-		ad.parentNode.removeChild(ad);
-	});
-	document.querySelector(".info-section").append(ad);
-	ad.append(close);
-	return ad;
 }
 
 // 전체화면

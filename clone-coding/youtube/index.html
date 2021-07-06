@@ -12,8 +12,9 @@
 		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 		<script src="YouTube.js" defer></script>
 		<script src="button_click.js" defer></script>
-		<script src="video-controls.js" defer></script>
-		<script src="prev-ad.js" defer></script>
+		<script type="module" src="video-controls.js" defer></script>
+		<script type="module" src="playlist.js" defer></script>
+		<script type="module" src="ad.js" defer></script>
 		<title>YouTube</title>
 	</head>
 	<body data-fullscreen="false">
@@ -34,7 +35,6 @@
 					지원하지 않는 브라우저입니다.
 				</video>
 				<div id="video-screen" data-state="hidden"></div>
-				<!-- <div class="ad-pre-video"></div> -->
 			</div>
 			<!-- 비디오 컨트롤 -->
 			<div id="alert-unmute" data-state="full">
