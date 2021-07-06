@@ -10,12 +10,14 @@ const videoScreen = document.getElementById("video-screen");
 const controls = document.getElementById("video-controls");
 const unmuteText = document.getElementById("alert-unmute");
 const playpause = document.getElementById("playpause");
+const backward = document.getElementById("backward");
+const forward = document.getElementById("forward");
+const duration = document.getElementById("duration");
 const progress = document.querySelector(".progress");
 const progressBarLine = document.getElementById("progress-bar-line");
 const progressBar = document.getElementById("progress-bar");
 const fs = document.getElementById("fs");
 const currentTime = document.getElementById("currentT");
-const duration = document.getElementById("duration");
 
 // 음소거 해제
 let alertUnmute = setTimeout(function () {
@@ -88,6 +90,17 @@ video.addEventListener('pause', function() {
 playpause.addEventListener('click', function(e) {
 	if (video.paused || video.ended) video.play();
 	else video.pause();
+});
+
+//이전 영상, 다음 영상
+backward.addEventListener('click', function() {
+	localStorage.setItem("videoCnt", localStorage.getItem("videoCnt") - 2);
+	video.pause();
+	playNextVideo();
+});
+forward.addEventListener('click', function() {
+	video.pause();
+	playNextVideo();
 });
 
 // 비디오 progress bar 조작
