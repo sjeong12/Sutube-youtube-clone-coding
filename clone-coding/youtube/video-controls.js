@@ -59,16 +59,21 @@ controls.addEventListener('click', function() {
 // 비디오 play/pause
 var changeButtonState = function(type) {
 	if (type == 'playpause') {
-		if (video.paused || video.ended) {
+		if (video.paused) {
 			playpause.setAttribute('data-state', 'pause');
 			clearTimeout(toastControls);
-			if (controls.getAttribute('data-state') !== 'screen')
+			if (video.ended)
+				controls.setAttribute('data-state', 'hidden');
+			else if (controls.getAttribute('data-state') !== 'screen')
 			{
 				controls.setAttribute('data-state', 'visible');
 				progress.setAttribute('data-state', 'visible');
 			}
 		}
-		else playpause.setAttribute('data-state', 'play');
+		else {
+			playpause.setAttribute('data-state', 'play');
+			controls.setAttribute('data-state', 'hidden');
+		}
 	}
 }
 video.addEventListener('play', function() {

@@ -17,7 +17,8 @@ export function playNextVideo() {
 	if (videoCnt >= playlist.length)
 		videoCnt = 0;
 	videoSource.setAttribute('src', playlist[videoCnt]);
-	showAdPreVideo (10000, adlist[prevAdCnt]);
+	if (prevAdCnt < adlist.length)
+		showAdPreVideo (10000, adlist[prevAdCnt]);
 	setTimeout(function () {
 		video.load();
 	}, 10000);
