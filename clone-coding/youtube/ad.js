@@ -20,17 +20,20 @@ function showAdInVideo(current, duration) {
 			if (num % 2 == 0)
 			{
 				time = shortAdTime;
-				ad = getNewAdUnderVideo();
+				ad = getNewAd("div", "ad-under-video",
+					document.querySelector(".info-section"));
 			}
 			else if (cnt == 5)
 			{
 				time = longAdTime;
-				ad = getNewAd("div", "wide");
+				ad = getNewAd("div", "ad-in-video wide-ad",
+					document.querySelector(".video-section"));
 				setAdStyle(ad, "wide", "center");
 			}
 			else {
 				time = shortAdTime;
-				ad = getNewAd("div", "small");
+				ad = getNewAd("div", "ad-in-video small-ad",
+					document.querySelector(".video-section"));
 				if (cnt == 1)
 					setAdStyle(ad, "small", "left");
 				if (cnt == 3)
@@ -45,18 +48,18 @@ function showAdInVideo(current, duration) {
 }
 //광고 생성
 let isLeftAd = true;
-function getNewAd(type, size) {
+function getNewAd(type, name, doc) {
 	let ad = document.createElement(type);
 	let close = document.createElement('button');
 
-	ad.className = 'ad-in-video ' + size + "-ad";
+	ad.className = name;
 	ad.setAttribute('data-state', 'hidden');
 	close.className = 'close-ad-button';
 	close.innerHTML = '&times;';
 	close.addEventListener("click", function() {
 		ad.setAttribute('data-state', 'hidden');
 	});
-	document.querySelector(".video-section").append(ad);
+	doc.append(ad);
 	ad.append(close);
 	return ad;
 }
@@ -75,21 +78,6 @@ function setAdStyle(ad, size, pos) {
 		ad.style.bottom = "20px";
 		isLeftAd = true;
 	}
-}
-function getNewAdUnderVideo() {
-	let ad = document.createElement('div');
-	let close = document.createElement('button');
-
-	ad.className = "ad-under-video";
-	ad.setAttribute('data-state', 'hidden');
-	close.className = 'close-ad-button';
-	close.innerHTML = '&times;';
-	close.addEventListener("click", function() {
-		ad.setAttribute('data-state', 'hidden');
-	});
-	document.querySelector(".info-section").append(ad);
-	ad.append(close);
-	return ad;
 }
 
 // 영상 재생 전 광고

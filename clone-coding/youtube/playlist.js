@@ -18,7 +18,7 @@ export function playNextVideo() {
 	else if (videoCnt < 0)
 		videoCnt = playlist.length + parseInt(videoCnt);
 
-	document.querySelector(".progress").setAttribute('data-state', 'hidden');
+	document.querySelector(".progress").setAttribute('data-state', 'ad');
 	videoSource.setAttribute('src', playlist[videoCnt]);
 	if (prevAdCnt < adlist.length)
 		showAdPreVideo (10000, adlist[prevAdCnt]);

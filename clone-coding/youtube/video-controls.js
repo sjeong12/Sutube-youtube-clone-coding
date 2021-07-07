@@ -54,7 +54,8 @@ controls.addEventListener('click', function() {
 	else
 	{
 		controls.setAttribute('data-state', 'hidden');
-		progress.setAttribute('data-state', 'hidden');
+		if (progress.getAttribute('data-state') !== 'ad')
+			progress.setAttribute('data-state', 'hidden');
 	}
 });
 
@@ -69,7 +70,8 @@ var changeButtonState = function(type) {
 			else if (controls.getAttribute('data-state') !== 'screen')
 			{
 				controls.setAttribute('data-state', 'visible');
-				progress.setAttribute('data-state', 'visible');
+				if (progress.getAttribute('data-state') !== 'ad')
+					progress.setAttribute('data-state', 'visible');
 			}
 		}
 		else {
