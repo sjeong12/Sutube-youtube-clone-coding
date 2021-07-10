@@ -1,4 +1,5 @@
 import { showAdPreVideo } from './ad.js'
+import { setControllsState } from './video-controls.js'
 
 const videoSource = document.querySelector(".video-source");
 let playlist = readTextFile("./data/playlist.txt").split('\n');
@@ -18,7 +19,8 @@ export function playNextVideo() {
 	else if (videoCnt < 0)
 		videoCnt = playlist.length + parseInt(videoCnt);
 
-	document.querySelector(".progress").setAttribute('data-state', 'ad');
+	setControllsState('hidden');
+	document.getElementById("playpause").setAttribute('data-state', 'play');
 	videoSource.setAttribute('src', playlist[videoCnt]);
 	if (prevAdCnt < adlist.length)
 		showAdPreVideo (10000, adlist[prevAdCnt]);

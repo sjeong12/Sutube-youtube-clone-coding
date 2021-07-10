@@ -1,28 +1,22 @@
 import { playNextVideo } from './playlist.js';
 import { showAdInVideo } from './ad.js';
 
+const video = document.getElementById("video");
+const videoScreen = document.getElementById("video-screen");
 const videoSection = document.querySelector(".video-section");
+const duration = document.getElementById("duration");
+const currentTime = document.getElementById("currentT");
+const controls = document.getElementById("video-controls");
+const unmuteText = document.getElementById("alert-unmute");
+const progress = document.querySelector(".progress");
+const progressBar = document.getElementById("progress-bar");
+const progressBarLine = document.getElementById("progress-bar-line");
 const storyboard = document.querySelector(".player-storyboard");
 const storyboardImage = document.getElementById("player-storyboard-image");
 const storyboardTime = document.getElementById("player-storyboard-time");
-const video = document.getElementById("video");
-const videoScreen = document.getElementById("video-screen");
-const controls = document.getElementById("video-controls");
-const unmuteText = document.getElementById("alert-unmute");
-const playpause = document.getElementById("playpause");
-const backward = document.getElementById("backward");
-const forward = document.getElementById("forward");
-const duration = document.getElementById("duration");
-const progress = document.querySelector(".progress");
-const progressBarLine = document.getElementById("progress-bar-line");
-const progressBar = document.getElementById("progress-bar");
-const fs = document.getElementById("fs");
-const currentTime = document.getElementById("currentT");
 
 // 음소거 해제
-let alertUnmute = setTimeout(function () {
-	unmuteText.setAttribute('data-state', 'small');
-}, 4000);
+let alertUnmute = setTimeout(()=> {unmuteText.setAttribute('data-state', 'small');}, 4000);
 function unmute() {
 	video.muted = false;
 	clearTimeout(alertUnmute);
@@ -30,79 +24,144 @@ function unmute() {
 }
 unmuteText.addEventListener('click', unmute);
 
-// 비디오 컨트롤
-let toastControls;
-controls.addEventListener('click', function() {
+controls.addEventListener('click', function(e) {
 	if (video.muted)
 	{
 		unmute();
 		return ;
 	}
-	if (controls.getAttribute('data-state') == 'hidden')
+	let target = e.target;
+	while (!target.classList.contains('controls-btn'))
 	{
-		clearTimeout(toastControls);
-		controls.setAttribute('data-state', 'visible');
-		progress.setAttribute('data-state', 'visible');
-		if (!video.paused)
+		target = target.parentNode;
+		if (target.className == 'video-section')
 		{
-			toastControls = setTimeout(function () {
-				controls.setAttribute('data-state', 'hidden');
-				progress.setAttribute('data-state', 'hidden');
-			}, 2000);
+			target = null;
+			showControlsEvent();
+			return;
 		}
 	}
-	else
-	{
-		controls.setAttribute('data-state', 'hidden');
-		if (progress.getAttribute('data-state') !== 'ad')
-			progress.setAttribute('data-state', 'hidden');
+	setControllsState('hidden');
+	switch (target.id) {
+		case 'backward':
+			backwardEvent();
+			return;
+		case 'forward':
+			forwardeEvent();
+			return;
+		case 'playpause':
+			playpauseEvent(target);
+			return;
+		case 'fs':
+			fullscreenEvent(target);
+			return;
 	}
+	return;
 });
 
-// 비디오 play/pause
-var changeButtonState = function(type) {
-	if (type == 'playpause') {
-		if (video.paused) {
-			playpause.setAttribute('data-state', 'pause');
-			clearTimeout(toastControls);
-			if (video.ended)
-				controls.setAttribute('data-state', 'hidden');
-			else if (controls.getAttribute('data-state') !== 'screen')
-			{
-				controls.setAttribute('data-state', 'visible');
-				if (progress.getAttribute('data-state') !== 'ad')
-					progress.setAttribute('data-state', 'visible');
-			}
-		}
-		else {
-			playpause.setAttribute('data-state', 'play');
+// 컨트롤러/프로그레스바 상태 관리
+export function setControllsState(state) {
+	switch (state) {
+		case 'visible':
+			controls.setAttribute('data-state', 'visible');
+			progress.setAttribute('data-state', 'visible');
+			return;
+		case 'hidden':
 			controls.setAttribute('data-state', 'hidden');
-		}
+			progress.setAttribute('data-state', 'hidden');
+			return;
+		case 'screen':
+			controls.setAttribute('data-state', 'screen');
+			return;
 	}
 }
+
+// 비디오 컨트롤러 보기
+let toastControls;
+function showControlsEvent() {
+	if (controls.getAttribute('data-state') !== 'hidden')
+	{
+		setControllsState('hidden');
+		return;
+	}
+	clearTimeout(toastControls);
+	setControllsState('visible');
+	if (!video.paused)
+		toastControls = setTimeout(()=> { setControllsState('hidden'); }, 2000);
+	return;
+}
+// 이전 영상
+function backwardEvent() {
+	localStorage.setItem("videoCnt", localStorage.getItem("videoCnt") - 2);
+	video.pause();
+	playNextVideo();
+	return;
+}
+// 다음 영상
+function forwardeEvent() {
+	video.pause();
+	playNextVideo();
+	return;
+}
+// 재생/정지
+function playpauseEvent(target) {
+	if (video.paused) {
+		target.setAttribute('data-state', 'play');
+		video.play();
+		return;
+	}
+		clearTimeout(toastControls);
+		target.setAttribute('data-state', 'pause');
+		if (controls.getAttribute('data-state') == 'hidden')
+			setControllsState('visible');
+		video.pause();
+	return;
+}
+// 전체화면
+function fullscreenEvent(target) {
+	if (isFullScreen()) {
+		if (document.exitFullscreen) document.exitFullscreen();
+		else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+		else if (document.webkitCancelFullScreen) document.webkitCancelFullScreen();
+		else if (document.msExitFullscreen) document.msExitFullscreen();
+		document.body.setAttribute('data-fullscreen', false);
+		if (target.getAttribute('data-state') == 'fullscreen')
+			target.setAttribute('data-state', 'unfullscreen');
+		else
+			target.setAttribute('data-state', 'fullscreen');
+	}
+	else {
+		if (videoSection.requestFullscreen) videoSection.requestFullscreen();
+		else if (videoSection.mozRequestFullScreen) videoSection.mozRequestFullScreen();
+		else if (videoSection.webkitRequestFullScreen) document.body.webkitRequestFullScreen();
+		else if (videoSection.msRequestFullscreen) videoSection.msRequestFullscreen();
+		document.body.setAttribute('data-fullscreen', true);
+		if (target.getAttribute('data-state') == 'fullscreen')
+			target.setAttribute('data-state', 'unfullscreen');
+		else
+			target.setAttribute('data-state', 'fullscreen');
+	}
+	return;
+}
+function isFullScreen() {
+	return !!(document.fullscreen || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement || document.fullscreenElement);
+}
+
+// 비디오 재생/정지 이벤트
 video.addEventListener('play', function() {
-	changeButtonState('playpause');
 	currentTime.innerText = getTime(new Date(this.currentTime * 1000));
 	duration.innerText = ' / ' + getTime(new Date(this.duration * 1000));
 }, false);
 video.addEventListener('pause', function() {
-	changeButtonState('playpause');
 	if (video.ended) playNextVideo();
 }, false);
-playpause.addEventListener('click', function(e) {
-	if (video.paused || video.ended) video.play();
-	else video.pause();
-});
 
-//이전 영상, 다음 영상
-backward.addEventListener('click', function() {
-	localStorage.setItem("videoCnt", localStorage.getItem("videoCnt") - 2);
-	video.pause();
-	playNextVideo();
-});
-forward.addEventListener('click', function() {
-	video.pause();
-	playNextVideo();
+// 비디오 재생중 - progress bar 시간 연동
+video.addEventListener("timeupdate", function(e) {
+	currentTime.innerText = getTime(new Date(this.currentTime * 1000));
+	progressBar.style.width = this.currentTime / this.duration * 100 + "%";
+
+	showAdInVideo(this.currentTime, this.duration);
 });
 
 // 비디오 progress bar 조작
@@ -125,14 +184,16 @@ progressBarLine.addEventListener('mousedown', function(e) {
 		videoScreen.setAttribute('data-state', 'hidden');
 		document.removeEventListener('mousemove', moveProgress);
 		if (video.paused)
+		{
 			video.play();
+			document.getElementById("playpause").setAttribute('data-state', 'play');
+		}
 		storyboard.setAttribute('aria-hidden', 'true');
-		progress.setAttribute('data-state', 'hidden');
-		controls.setAttribute('data-state', 'hidden');
+		setControllsState('hidden');
 		document.removeEventListener('mouseup', upProgress);
 	}
-
-	controls.setAttribute('data-state', 'screen');
+	clearTimeout(toastControls);
+	setControllsState('screen');
 	if (!video.paused)
 		video.pause();
 	moveProgress(e);
@@ -155,47 +216,8 @@ function getScreenshot(video, scale) {
 	return canvas.toDataURL();
 }
 
-// 비디오와 progress bar 시간 연동
-video.addEventListener("timeupdate", function(e) {
-	currentTime.innerText = getTime(new Date(this.currentTime * 1000));
-	progressBar.style.width = this.currentTime / this.duration * 100 + "%";
-
-	showAdInVideo(this.currentTime, this.duration);
-});
 function getTime(time) {
 	let minute = ("0" + time.getMinutes()).slice(-2);
 	let second = ("0" + time.getSeconds()).slice(-2);
 	return (minute + ':' + second);
-}
-
-// 전체화면
-fs.addEventListener("click", function(e) {
-	if (isFullScreen()) {
-		if (document.exitFullscreen) document.exitFullscreen();
-		else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-		else if (document.webkitCancelFullScreen) document.webkitCancelFullScreen();
-		else if (document.msExitFullscreen) document.msExitFullscreen();
-		setFullscreenData(false);
-		if (fs.getAttribute('data-state') == 'fullscreen')
-			fs.setAttribute('data-state', 'unfullscreen');
-		else
-			fs.setAttribute('data-state', 'fullscreen');
-	}
-	else {
-		if (videoSection.requestFullscreen) videoSection.requestFullscreen();
-		else if (videoSection.mozRequestFullScreen) videoSection.mozRequestFullScreen();
-		else if (videoSection.webkitRequestFullScreen) document.body.webkitRequestFullScreen();
-		else if (videoSection.msRequestFullscreen) videoSection.msRequestFullscreen();
-		setFullscreenData(true);
-		if (fs.getAttribute('data-state') == 'fullscreen')
-			fs.setAttribute('data-state', 'unfullscreen');
-		else
-			fs.setAttribute('data-state', 'fullscreen');
-	}
-});
-function isFullScreen() {
-	return !!(document.fullscreen || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement || document.fullscreenElement);
-}
-function setFullscreenData(state) {
-	document.body.setAttribute('data-fullscreen', !!state);
 }
