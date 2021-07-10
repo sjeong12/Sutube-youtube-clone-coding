@@ -1,4 +1,4 @@
-.controls {
+#video-controls {
 	width:100%;
 	height: 100%;
 	position: absolute;
@@ -13,16 +13,16 @@
 	opacity: 0;
 	transition: opacity 700ms;
 }
-.controls[data-state=visible] {
+#video-controls[data-state=visible] {
 	opacity: 1;
 }
-.controls[data-state=visible] > div {
+#video-controls[data-state=visible] > div {
 	display: flex;
 }
-.controls[data-state=screen]{
+#video-controls[data-state=screen]{
 	opacity: 1;
 }
-.controls[data-state=screen] > div {
+#video-controls[data-state=screen] > div {
 	display: none;
 }
 
