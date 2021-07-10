@@ -9,7 +9,7 @@ http-server 패키지 전역 설치
 ```bash
 npm install -g http-server
 ```
-서버 실행
+'Youtube'디렉토리로 이동 후 서버 실행
 ```bash
 cd ./Sutube-youtube-clone-coding/youtube
 npx http-server
