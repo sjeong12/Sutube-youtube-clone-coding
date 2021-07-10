@@ -4,6 +4,18 @@
 
 ## 소개
 
+## 실행
+http-server 패키지 전역 설치
+```bash
+npm install -g http-server
+```
+서버 실행
+```bash
+cd ./Sutube-youtube-clone-coding/youtube
+npx http-server
+```
+이후 localhost:8080에 접속하여 확인
+
 ## 기술
 - HTML
 - JS
