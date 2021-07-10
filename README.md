@@ -1,4 +1,6 @@
 # Sutube : Youtube Clone Coding
+[:eyes:이슈트래킹](https://github.com/sjeong12/Sutube-youtube-clone-coding/projects) [:pencil2:학습일지](https://sewcode.tistory.com/category/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%88%98%ED%8A%9C%EB%B8%8C%20%3A%20%EC%9C%A0%ED%8A%9C%EB%B8%8C%20%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9)
+
 
 ## 소개
 
