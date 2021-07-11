@@ -10,12 +10,12 @@
 
 - 작은 화면(기본화면 / 더보기 / 댓글) - 확장 화면
 
-<img src="https://user-images.githubusercontent.com/45448572/125165491-1cf2fb80-e1d2-11eb-9021-e3f51d27f53d.png" height="320px"> <img src="https://user-images.githubusercontent.com/45448572/125165511-3bf18d80-e1d2-11eb-93e1-a24ada7960e8.png" height="320px"> <img src="https://user-images.githubusercontent.com/45448572/125165520-457af580-e1d2-11eb-8958-0ca3c8a1db79.png" height="320px"> &nbsp;&nbsp;&nbsp;&nbsp;  <img src="https://user-images.githubusercontent.com/45448572/125165426-c8e81700-e1d1-11eb-9a31-6d52eee52df0.png" height="320px">
+<img src="https://user-images.githubusercontent.com/45448572/125165491-1cf2fb80-e1d2-11eb-9021-e3f51d27f53d.png" height="300px"> <img src="https://user-images.githubusercontent.com/45448572/125165511-3bf18d80-e1d2-11eb-93e1-a24ada7960e8.png" height="300px"> <img src="https://user-images.githubusercontent.com/45448572/125165520-457af580-e1d2-11eb-8958-0ca3c8a1db79.png" height="300px"> &nbsp;&nbsp;&nbsp;&nbsp;  <img src="https://user-images.githubusercontent.com/45448572/125165426-c8e81700-e1d1-11eb-9a31-6d52eee52df0.png" height="300px">
 <br/><br/>
 
 - 넓은 화면(기본화면 / 댓글+더보기)
 
-<img src="https://user-images.githubusercontent.com/45448572/125165072-4e6ac780-e1d0-11eb-9541-8832fde03867.png" height="380px"> &nbsp;&nbsp; <img src="https://user-images.githubusercontent.com/45448572/125165116-896cfb00-e1d0-11eb-8415-a1886a8f64a2.png" height="380px">
+<img src="https://user-images.githubusercontent.com/45448572/125165072-4e6ac780-e1d0-11eb-9541-8832fde03867.png" height="355px"> &nbsp;&nbsp; <img src="https://user-images.githubusercontent.com/45448572/125165116-896cfb00-e1d0-11eb-8415-a1886a8f64a2.png" height="355px">
 <br/><br/>
 
 
