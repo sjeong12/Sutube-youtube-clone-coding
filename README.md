@@ -28,12 +28,13 @@
 
 
 ### | 광고
-영상 재생 중 또는 영상과 영상 사이에, txt파일로 부터 읽어온 광고를 차례로 송출합니다. `localStorage`에 시청 정보를 기록하여 중복 재생을 방지합니다.
+영상 재생중 광고는 1~5번 순서대로 Progress bar에 표시된 시점(○,△)에 등장합니다.  
+중간 광고는 txt파일로 부터 읽어온 광고 목록에 따라 차례로 등장하며, `localStorage`에 시청 정보를 기록하여 중복 재생을 방지합니다.
 <br/><br/>
 
 - 영상 재생 중(img 광고) - 중간 광고(text 광고)
 
-<img src="https://user-images.githubusercontent.com/45448572/125166170-56793600-e1d5-11eb-9f70-869613fa1847.png" height="380px"> &nbsp;&nbsp; <img src="https://user-images.githubusercontent.com/45448572/125165997-78be8400-e1d4-11eb-852e-0107775016fe.png" height="380px">
+<img src="https://user-images.githubusercontent.com/45448572/125193026-67818000-e285-11eb-8e02-a27b70b2b3d2.png" height="370px"> &nbsp;&nbsp; <img src="https://user-images.githubusercontent.com/45448572/125165997-78be8400-e1d4-11eb-852e-0107775016fe.png" height="370px">
 <br/><br/><br/><br/>
 
 
