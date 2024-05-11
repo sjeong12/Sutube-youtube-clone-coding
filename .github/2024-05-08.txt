@@ -1,0 +1,3 @@
+{"timestamp":"2024-05-08 22:40:41.0676","action":"클릭","target":"다음 영상 시청","msg":"http://localhost:8080/src/video/video4.mp4","uuid":"4a782258-4b8e-4929-93c3-305d7ea3d761"}
+{"timestamp":"2024-05-08 22:44:08.0781","action":"클릭","target":"다음 영상 시청","msg":"http://localhost:8080/src/video/video1.mp4","uuid":"4a782258-4b8e-4929-93c3-305d7ea3d761"}
+{"timestamp":"2024-05-08 22:44:10.0372","action":"클릭","target":"다음 영상 시청","msg":"http://localhost:8080/src/video/video2.mp4","uuid":"4a782258-4b8e-4929-93c3-305d7ea3d761"}

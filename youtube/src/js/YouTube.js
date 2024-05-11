@@ -18,7 +18,7 @@ for (let i = 0; i < 20; i++) {
 
 	comment.className = 'comments-item';
 	comment.innerHTML = '<div class="comment">\
-		<div class="channel-img"><img src="src/profile.png" alt="채널 이동"></div>\
+		<div class="channel-img"><img src="src/img/profile.png" alt="채널 이동"></div>\
 		<div class="comment-text">\
 			<div id="channel-title">채널 이름</div>\
 			<div id="comment-content">이 곳에 댓글 내용이 적힙니다.</div>\
@@ -39,10 +39,10 @@ for (let i = 0; i < 30; i++) {
 
 	nextVideo.className = 'next-video-item';
 	nextVideo.innerHTML = '<div class="next-video-thumbnail">\
-	<img src="src/thumbnail1.jpg" alt="영상 보기"></div>\
+	<img src="src/img/thumbnail1.jpg" alt="영상 보기"></div>\
 	<div class="next-video-meta">\
 		<div class="next-video-info">\
-			<div class="next-video-channel-img"><img src="src/profile.png" alt="채널 이동"></div>\
+			<div class="next-video-channel-img"><img src="src/img/profile.png" alt="채널 이동"></div>\
 			<div class="title">\
 				<div class="next-video-title">\
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit,\

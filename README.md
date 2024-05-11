@@ -1,5 +1,5 @@
 # Sutube : Youtube Clone Coding
-[:eyes:이슈트래킹](https://github.com/sjeong12/Sutube-youtube-clone-coding/projects) [:pencil2:학습일지](https://sewcode.tistory.com/category/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%88%98%ED%8A%9C%EB%B8%8C%20%3A%20%EC%9C%A0%ED%8A%9C%EB%B8%8C%20%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9)
+[:eyes:이슈트래킹](https://github.com/sjeong12/Sutube-youtube-clone-coding/issues) [:pencil2:학습일지](https://sewcode.tistory.com/category/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%88%98%ED%8A%9C%EB%B8%8C%20%3A%20%EC%9C%A0%ED%8A%9C%EB%B8%8C%20%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9)
 <br/><br/>
 
 ## 소개
@@ -38,15 +38,33 @@
 <br/><br/><br/><br/>
 
 
-## 실행
-http-server 패키지 전역 설치
-```bash
-npm install -g http-server
+### | 로깅
+Cookie를 활용하여 비로그인 유저에게 uuid를 부여하고 식별합니다.
+`/log` 경로에 YYYY-MM-DD.txt 파일을 생성하고, 다음과 같이 로그를 쌓습니다.
+
+이제 로그가 남는 것을 확인 했으니, 로깅이 필요한 이벤트를 선별하고, 적절한 로그 형태를 설계해보겠습니다.
+추후에는 로그를 쉽게 확인할 수 있도록, 분석 툴을 도입할 계획입니다.
+<br/><br/>
+
 ```
-/youtube로 이동 후 서버 실행
+{"timestamp":"2024-05-11 13:25:16.0843","action":"클릭","target":"다음 영상 시청","msg":"video4.mp4","uuid":"2c606d8a-613f-43c6-9499-6afb9708e7a4"}
+{"timestamp":"2024-05-11 13:25:24.0771","action":"클릭","target":"다음 영상 시청","msg":"video1.mp4","uuid":"2c606d8a-613f-43c6-9499-6afb9708e7a4"}
+{"timestamp":"2024-05-11 13:29:34.0677","action":"클릭","target":"다음 영상 시청","msg":"video2.mp4","uuid":"2c606d8a-613f-43c6-9499-6afb9708e7a4"}
+{"timestamp":"2024-05-11 13:29:37.0052","action":"클릭","target":"다음 영상 시청","msg":"video3.mp4","uuid":"2c606d8a-613f-43c6-9499-6afb9708e7a4"}
+{"timestamp":"2024-05-11 13:32:01.0677","action":"클릭","target":"다음 영상 시청","msg":"video4.mp4","uuid":"2c606d8a-613f-43c6-9499-6afb9708e7a4"}
+```
+<br/><br/>
+
+
+## 실행
+express.js 패키지 설치
 ```bash
-cd ./Sutube-youtube-clone-coding/youtube
-npx http-server
+cd server
+npm install
+```
+서버 실행
+```bash
+nodemon ./server/server.js
 ```
 이후 localhost:8080에 접속하여 확인
 <br/><br/><br/><br/>
@@ -56,9 +74,12 @@ npx http-server
 - HTML
 - JS
 - CSS
+- Node.js
+- Express.js
 <br/><br/><br/><br/>
 
 
 ## 개발 예정
 - 다음 영상 목록에 실제 다음 영상의 썸네일 제공
-- 광고 시청 로그(유저 정보, 광고 정보, 시청 시간 등) 추가
+- 광고 시청 로그(유저 정보, 광고 정보, 시청 시간 등) 설계
+- 로그 분석 툴 도입

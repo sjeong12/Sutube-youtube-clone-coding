@@ -110,11 +110,11 @@ function playpauseEvent(target) {
 		video.play();
 		return;
 	}
-		clearTimeout(toastControls);
-		target.setAttribute('data-state', 'pause');
-		if (controls.getAttribute('data-state') == 'hidden')
-			setControllsState('visible');
-		video.pause();
+	clearTimeout(toastControls);
+	target.setAttribute('data-state', 'pause');
+	if (controls.getAttribute('data-state') == 'hidden')
+		setControllsState('visible');
+	video.pause();
 	return;
 }
 // 전체화면
@@ -149,8 +149,8 @@ function isFullScreen() {
 
 // 비디오 재생/정지 이벤트
 video.addEventListener('play', function() {
-	currentTime.innerText = getTime(new Date(this.currentTime * 1000));
-	duration.innerText = ' / ' + getTime(new Date(this.duration * 1000));
+	currentTime.innerText = getTime(this.currentTime);
+	duration.innerText = ' / ' + getTime(this.duration);
 }, false);
 video.addEventListener('pause', function() {
 	if (video.ended) playNextVideo();
@@ -158,66 +158,90 @@ video.addEventListener('pause', function() {
 
 // 비디오 재생중 - progress bar 시간 연동
 video.addEventListener("timeupdate", function(e) {
-	currentTime.innerText = getTime(new Date(this.currentTime * 1000));
+	currentTime.innerText = getTime(this.currentTime);
 	progressBar.style.width = this.currentTime / this.duration * 100 + "%";
 
 	showAdInVideo(this.currentTime, this.duration);
 });
 
-// 비디오 progress bar 조작
+//비디오 progress bar 조작
 progressBarLine.addEventListener('mousedown', function(e) {
-	function moveProgress(e) {
-		let pos = (e.pageX  - progressBarLine.offsetLeft) / progressBarLine.offsetWidth;
-		video.currentTime = pos * video.duration;
-		let width = video.currentTime / video.duration * 100;
-		progressBar.style.width = width + "%";
-		if (width < 20)
-			storyboard.style.left = "20%"
-		else if (width > 80)
-			storyboard.style.left = "80%"
-		else
-			storyboard.style.left = width + "%";
-		storyboardImage.src = getScreenshot(video, 0.35);
-		storyboardTime.innerText = getTime(new Date(video.currentTime * 1000));
-	}
-	function upProgress(e) {
-		videoScreen.setAttribute('data-state', 'hidden');
+	clearTimeout(toastControls);
+	moveProgress(e);
+	setControllsState('screen');
+	toggleProgressEventListener(true);
+	toggleVideoPlay(false);
+	toggleVideoScreen(true);
+	progress.setAttribute('data-state', 'visible');
+});
+//계산
+function computeVideoCurrentTime(pageX, duration) {
+	return ((pageX  - progressBarLine.offsetLeft) / progressBarLine.offsetWidth) * duration;
+}
+function computeVideoProgressWidth(currentTime, duration) {
+	return currentTime / duration * 100;
+}
+// 액션
+function moveProgress(e) {
+	const currentTime = computeVideoCurrentTime(e.pageX, video.duration);
+	const width = computeVideoProgressWidth(currentTime, video.duration) + "%";
+
+	video.currentTime = currentTime;
+	progressBar.style.width = width;
+	storyboard.style.left = width;
+	storyboardImage.src = getScreenshot(video, 0.35);
+	storyboardTime.innerText = getTime(video.currentTime);
+	storyboard.setAttribute('aria-hidden', 'false');
+}
+function upProgress() {
+	setControllsState('hidden');
+	toggleProgressEventListener(false);
+	toggleVideoPlay(true);
+	toggleVideoScreen(false);
+	storyboard.setAttribute('aria-hidden', 'true');
+}
+function toggleProgressEventListener(isOn) {
+	if (isOn) {
+		document.addEventListener('mousemove', moveProgress);
+		document.addEventListener('mouseup', upProgress);
+	} else {
 		document.removeEventListener('mousemove', moveProgress);
-		if (video.paused)
-		{
-			video.play();
-			document.getElementById("playpause").setAttribute('data-state', 'play');
-		}
-		storyboard.setAttribute('aria-hidden', 'true');
-		setControllsState('hidden');
 		document.removeEventListener('mouseup', upProgress);
 	}
-	clearTimeout(toastControls);
-	setControllsState('screen');
-	if (!video.paused)
+}
+function toggleVideoScreen(isOn) {
+	if (isOn) {
+		videoScreen.style.backgroundImage = "url(" + getScreenshot(video, 1) + ")";
+		videoScreen.setAttribute('data-state', 'visible');
+	} else {
+		videoScreen.setAttribute('data-state', 'hidden');
+	}
+}
+function toggleVideoPlay(isOn) {
+	if (isOn && video.paused) {
+		video.play();
+		document.getElementById("playpause").setAttribute('data-state', 'play');
+	} else if (!isOn && !video.paused) {
 		video.pause();
-	moveProgress(e);
-	storyboard.setAttribute('aria-hidden', 'false');
-	progress.setAttribute('data-state', 'visible');
-	videoScreen.setAttribute('data-state', 'visible');
-	videoScreen.style.backgroundImage = "url(" + getScreenshot(video, 1) + ")";
-	document.addEventListener('mousemove', moveProgress);
-	document.addEventListener('mouseup', upProgress);
-});
+	}
+}
 
 // progress bar 스토리보드 이미지 생성
 function getScreenshot(video, scale) {
 	scale = scale || 1;
 
 	const canvas = document.createElement("canvas");
+	// 계산
 	canvas.width = video.clientWidth * scale;
 	canvas.height = video.clientHeight * scale;
+	//액션
 	canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
 	return canvas.toDataURL();
 }
 
-function getTime(time) {
-	let minute = ("0" + time.getMinutes()).slice(-2);
-	let second = ("0" + time.getSeconds()).slice(-2);
+function getTime(currentTime) {
+	const time = new Date(currentTime * 1000);
+	const minute = ("0" + time.getMinutes()).slice(-2);
+	const second = ("0" + time.getSeconds()).slice(-2);
 	return (minute + ':' + second);
 }
