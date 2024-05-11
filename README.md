@@ -64,7 +64,7 @@ npm install
 ```
 서버 실행
 ```bash
-nodemon ./server/server.js
+nodemon server.js
 ```
 이후 localhost:8080에 접속하여 확인
 <br/><br/><br/><br/>
