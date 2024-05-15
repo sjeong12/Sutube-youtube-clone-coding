@@ -5,7 +5,7 @@ function log(action, target, msg) {
 		timestamp: getTimestamp(),
 		action: action,
 		target: target,
-		msg: msg,
+		contents: msg,
 		uuid: getCookieUuid()
 	};
 	printLog(JSON.stringify(logMsg));

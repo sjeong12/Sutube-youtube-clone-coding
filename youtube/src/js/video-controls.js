@@ -184,14 +184,11 @@ function computeVideoProgressWidth(currentTime, duration) {
 // 액션
 function moveProgress(e) {
 	const currentTime = computeVideoCurrentTime(e.pageX, video.duration);
-	const width = computeVideoProgressWidth(currentTime, video.duration) + "%";
+	const width = computeVideoProgressWidth(currentTime, video.duration);
 
 	video.currentTime = currentTime;
-	progressBar.style.width = width;
-	storyboard.style.left = width;
-	storyboardImage.src = getScreenshot(video, 0.35);
-	storyboardTime.innerText = getTime(video.currentTime);
-	storyboard.setAttribute('aria-hidden', 'false');
+	progressBar.style.width = width + "%";
+	showStoryboard(width);
 }
 function upProgress() {
 	setControllsState('hidden');
@@ -237,6 +234,15 @@ function getScreenshot(video, scale) {
 	//액션
 	canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
 	return canvas.toDataURL();
+}
+
+function showStoryboard(left) {
+	if (left < 20) left = 20;
+	else if (left > 80) left = 80;
+	storyboard.style.left = left + '%';
+	storyboardImage.src = getScreenshot(video, 0.35);
+	storyboardTime.innerText = getTime(video.currentTime);
+	storyboard.setAttribute('aria-hidden', 'false');
 }
 
 function getTime(currentTime) {

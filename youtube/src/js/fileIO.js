@@ -12,10 +12,7 @@ function printLog(txt) {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({
-				fileName: getDate(),
-				logMsg: txt
-			})
+			body: txt
 		})
 		.then(response => {
 			if (!response.ok) {
@@ -27,15 +24,6 @@ function printLog(txt) {
 			console.error('writeTextFile() : ', error);
 		});
 	});
-}
-
-function getDate() {
-	const now = new Date();
-	const year = now.getFullYear();
-	const month = String(now.getMonth() + 1).padStart(2, '0');
-	const day = String(now.getDate()).padStart(2, '0');
-
-	return `${year}-${month}-${day}`;
 }
 
 export { readFile, printLog };

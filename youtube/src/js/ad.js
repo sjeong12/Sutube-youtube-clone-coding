@@ -1,3 +1,5 @@
+import { log } from './logger.js'
+
 if(!localStorage.getItem('adInPlayCnt')){
 	localStorage.setItem("adInPlayCnt", 0);
 }
@@ -81,9 +83,9 @@ function setAdStyle(ad, size, pos) {
 }
 
 // 영상 재생 전 광고
-function getNewAdPreVideo(type) {
-	let ad = document.createElement(type);
-	let close = document.createElement('button');
+function getNewAdPreVideo() {
+	let ad = document.createElement("div");
+	let close = document.createElement("button");
 
 	ad.className = "ad-pre-video";
 	ad.setAttribute('data-state', 'hidden');
@@ -96,12 +98,15 @@ function getNewAdPreVideo(type) {
 	ad.append(close);
 	return ad;
 }
-function showAdPreVideo(time, contents) {
-	let ad = getNewAdPreVideo("div");
-	ad.setAttribute('data-state', 'visible');
-	ad.innerText = contents;
+function showAdPreVideo(time, ad) {
+	const $ad = getNewAdPreVideo();
+
+	$ad.setAttribute('data-state', 'visible');
+	$ad.innerText = ad.contents;
 	setTimeout(function () {
-		ad.parentNode.removeChild(ad);
+		localStorage.setItem("lastAdSeq", ad.seq);
+		log("광고 시청", ad.seq, ad.contents);
+		$ad.parentNode.removeChild($ad);
 	}, time);
 }
 

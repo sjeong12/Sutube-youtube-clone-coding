@@ -1,3 +1,10 @@
-광고 노출 중
-텍스트 광고 입니다
-텍스트 광고3
+{"seq":1, "contents": "광고 노출 중"}
+{"seq":2, "contents": "텍스트 광고 입니다"}
+{"seq":3, "contents": "텍스트 광고3"}
+{"seq":4, "contents": "광고4"}
+{"seq":5, "contents": "광고5"}
+{"seq":6, "contents": "광고6"}
+{"seq":7, "contents": "광고7"}
+{"seq":8, "contents": "광고8"}
+{"seq":9, "contents": "광고9"}
+{"seq":10, "contents": "광고10"}
