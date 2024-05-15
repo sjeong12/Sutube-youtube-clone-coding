@@ -17,20 +17,25 @@ app.get('/', (req, res) => {
 app.get('/recommendedAd', (req, res) => {
     const readLogStream = fs.createReadStream(path.join(__dirname, `../data/log/${getDate()}.txt`), { encoding: 'utf-8' });
     const readAdStream = fs.createReadStream(path.join(__dirname, `../data/ad.txt`), { encoding: 'utf-8' });
+    const uuid = getCookieUuid(req.headers.cookie);
     let logList = [];
     let adList = [];
     let leastViewedAd = null;
 
     readLogStream.on('data', (chunk) => {
-        const chunkLines = chunk.split('\n');
+        if (uuid) {
+            const chunkLines = chunk.split('\n');
 
-        for (let i = chunkLines.length - 1; i >= 0; i--) {
-            if (chunkLines.length - i <= 100) {
-                logList.unshift(JSON.parse(chunkLines[i]));
-            } else {
-                break;
+            for (let i = chunkLines.length - 1; i >= 0; i--) {
+                if (chunkLines.length - i <= 100) {
+                    logList.unshift(JSON.parse(chunkLines[i]));
+                } else {
+                    break;
+                }
             }
+            logList = logList.filter(log => log.uuid === uuid);
         }
+        console.log(logList);
         readLogStream.close();
     });
 
@@ -87,6 +92,14 @@ app.listen(8080, () => {
 	console.log('[server] 📡 listening on 8080');
 });
 
+function getCookieUuid(cookie){
+    if(cookie){
+        const uuid = cookie.split('uuid=');
+        return uuid[1];
+    }
+    return null;
+}
+
 function getDate() {
 	const now = new Date();
 	const year = now.getFullYear();
@@ -97,10 +110,9 @@ function getDate() {
 }
 
 function computeRecommendedAd(adList, logList, lastAdSeq) {
-    adList = adList.filter(ad => ad.seq != lastAdSeq)
+    adList = adList.filter(ad => ad.seq != lastAdSeq);
     if (logList.length == 0) {
-        res.json(adList[0]);
-        return;
+        return adList[0];
     }
     adList.map(ad => ad.views = 0);
     for (const log of logList) {
