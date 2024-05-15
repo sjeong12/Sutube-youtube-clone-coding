@@ -27,7 +27,7 @@
 <br/><br/>
 
 
-### | 광고
+### | 광고 레이아웃
 영상 재생중 광고는 1~5번 순서대로 Progress bar에 표시된 시점(○,△)에 등장합니다.  
 중간 광고는 txt파일로 부터 읽어온 광고 목록에 따라 차례로 등장하며, `localStorage`에 시청 정보를 기록하여 중복 재생을 방지합니다. (AdBlock 등 광고차단 확장앱에 영향을 받을 수 있습니다)
 <br/><br/>
@@ -35,25 +35,27 @@
 - 영상 재생 중(img 광고) - 중간 광고(text 광고)
 
 <img src="https://user-images.githubusercontent.com/45448572/125193026-67818000-e285-11eb-8e02-a27b70b2b3d2.png" height="370px"> &nbsp;&nbsp; <img src="https://user-images.githubusercontent.com/45448572/125165997-78be8400-e1d4-11eb-852e-0107775016fe.png" height="370px">
+<br/><br/>
+
+
+### | 추천 광고
+특정 사용자가 같은 광고를 중복해서 조회하지 않도록, 로그 기반 광고 추천 기능을 구현하였습니다.
+<br>특히, 연속으로 같은 광고가 노출되는 것을 방지하기 위해, localstoarge에 마지막에 조회한 광고의 seq를 저장합니다.
+<br/><br/>
+- Cookie를 활용하여 비로그인 유저에게 uuid를 부여하고 식별
+- `/log` 경로에 YYYY-MM-DD.txt 파일을 생성하고, 광고 시청 이력 저장
+- 최근 광고 시청 이력을 최대 100건 조회하고, 이 중 조회수가 가장 적은 광고를 노출
+- 같은 광고를 연속해서 노출하지 않도록, 가장 마지막에 시청했던 광고는 제외
+<br/><br/>
+
+```
+{"timestamp":"2024-05-15 15:11:26.0882","action":"광고 시청","target":8,"contents":"광고8","uuid":"e660b3b7-cf2c-4d7f-abda-c05d5f16eb20"}
+{"timestamp":"2024-05-15 15:12:33.0745","action":"광고 시청","target":1,"contents":"광고 노출 중","uuid":"e660b3b7-cf2c-4d7f-abda-c05d5f16eb20"}
+{"timestamp":"2024-05-15 15:13:43.0486","action":"광고 시청","target":2,"contents":"텍스트 광고 입니다","uuid":"e660b3b7-cf2c-4d7f-abda-c05d5f16eb20"}
+{"timestamp":"2024-05-15 15:22:41.0011","action":"광고 시청","target":3,"contents":"텍스트 광고3","uuid":"e660b3b7-cf2c-4d7f-abda-c05d5f16eb20"}
+{"timestamp":"2024-05-15 15:22:53.0439","action":"광고 시청","target":4,"contents":"광고4","uuid":"e660b3b7-cf2c-4d7f-abda-c05d5f16eb20"}
+```
 <br/><br/><br/><br/>
-
-
-### | 로깅
-Cookie를 활용하여 비로그인 유저에게 uuid를 부여하고 식별합니다.
-`/log` 경로에 YYYY-MM-DD.txt 파일을 생성하고, 다음과 같이 로그를 쌓습니다.
-
-이제 로그가 남는 것을 확인 했으니, 로깅이 필요한 이벤트를 선별하고, 적절한 로그 형태를 설계해보겠습니다.
-추후에는 로그를 쉽게 확인할 수 있도록, 분석 툴을 도입할 계획입니다.
-<br/><br/>
-
-```
-{"timestamp":"2024-05-11 13:25:16.0843","action":"클릭","target":"다음 영상 시청","msg":"video4.mp4","uuid":"2c606d8a-613f-43c6-9499-6afb9708e7a4"}
-{"timestamp":"2024-05-11 13:25:24.0771","action":"클릭","target":"다음 영상 시청","msg":"video1.mp4","uuid":"2c606d8a-613f-43c6-9499-6afb9708e7a4"}
-{"timestamp":"2024-05-11 13:29:34.0677","action":"클릭","target":"다음 영상 시청","msg":"video2.mp4","uuid":"2c606d8a-613f-43c6-9499-6afb9708e7a4"}
-{"timestamp":"2024-05-11 13:29:37.0052","action":"클릭","target":"다음 영상 시청","msg":"video3.mp4","uuid":"2c606d8a-613f-43c6-9499-6afb9708e7a4"}
-{"timestamp":"2024-05-11 13:32:01.0677","action":"클릭","target":"다음 영상 시청","msg":"video4.mp4","uuid":"2c606d8a-613f-43c6-9499-6afb9708e7a4"}
-```
-<br/><br/>
 
 
 ## 실행
@@ -79,7 +81,3 @@ nodemon server.js
 <br/><br/><br/><br/>
 
 
-## 개발 예정
-- 다음 영상 목록에 실제 다음 영상의 썸네일 제공
-- 광고 시청 로그(유저 정보, 광고 정보, 시청 시간 등) 설계
-- 로그 분석 툴 도입
